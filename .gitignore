@@ -2,7 +2,6 @@
 
 /vendor/*
 /config/app.php
-/tests
 /tmp/*
 !/tmp/empty
 /logs/*
