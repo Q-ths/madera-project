@@ -16,10 +16,10 @@ class CreateUser extends AbstractMigration
 
         $table
             ->addColumn('email','text', ['null' => false])
-            ->addColumn('password','varchar', ['null' => false, 'length' => 25])
+            ->addColumn('password','string', ['null' => false, 'length' => 25])
             ->addColumn('nom', 'text', ['null' => false])
             ->addColumn('prenom', 'text', ['null' => false])
-            ->addColumn('poste', 'varchar', ['null' => false]);
+            ->addColumn('poste', 'string', ['null' => false, 'length' => 255]);
 
         $table->create();
     }
