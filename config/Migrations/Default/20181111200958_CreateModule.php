@@ -12,30 +12,20 @@ class CreateModule extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('module');
-
-        $table->addColumn('projet_id','integer',['null' => false]);
-        $table->addForeignKey('projet_id', 'projet', 'id',  ['delete' => 'restrict','delete' => 'restrict']);
-
-        $table->addColumn('cctp_id','integer',['null' => true]);
-        $table->addForeignKey('cctp_id', 'cctp', 'id',  ['delete' => 'restrict','delete' => 'restrict']);
-
-        $table->addColumn('gamme_id','integer',['null' => true]);
-        $table->addForeignKey('gamme_id', 'gamme', 'id',  ['delete' => 'restrict','delete' => 'restrict']);
-
-        $table->addColumn('coupe_principe_id','integer',['null' => true]);
-        $table->addForeignKey('coupe_principe_id', 'coupe_principe', 'id',  ['delete' => 'restrict','delete' => 'restrict']);
-
-        $table->addColumn('nom','text',['null' => false]);
-
-        $table->addColumn('user_id', 'integer', ['null' => false]);
-
-        $table->addColumn('derniere_date_modification', 'datetime', ['null' => false]);
-
-        $table->addColumn('date_in','datetime',['null' => false]);
-
-        $table->addColumn('date_out','datetime',['null' => false]);
-
-        $table->create();
+        $this->table('module')
+            ->addColumn('projet_id','integer',['null' => false])
+            ->addForeignKey('projet_id', 'projet', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
+            ->addColumn('cctp_id','integer',['null' => true])
+            ->addForeignKey('cctp_id', 'cctp', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
+            ->addColumn('gamme_id','integer',['null' => true])
+            ->addForeignKey('gamme_id', 'gamme', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
+            ->addColumn('coupe_principe_id','integer',['null' => true])
+            ->addForeignKey('coupe_principe_id', 'coupe_principe', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
+            ->addColumn('nom','text',['null' => false])
+            ->addColumn('user_id', 'integer', ['null' => true])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
+            ->addColumn('date_in','datetime',['null' => true])
+            ->addColumn('date_out','datetime',['null' => true])
+            ->create();
     }
 }

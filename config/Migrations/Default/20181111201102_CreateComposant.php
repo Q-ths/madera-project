@@ -12,31 +12,20 @@ class CreateComposant extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('composant');
-
-        $table->addColumn('famille_composant_id','integer', ['null' => true]);
-        $table->addForeignKey('famille_composant_id', 'famille_composant','id', ['delete' => 'restrict', 'update' => 'restrict']);
-
-        $table->addColumn('tva_id','integer', ['null' => false]);
-        $table->addForeignKey('tva_id', 'tva','id', ['delete' => 'restrict', 'update' => 'restrict']);
-
-        $table->addColumn('fournisseur_id','integer', ['null' => false]);
-        $table->addForeignKey('fournisseur_id', 'fournisseur','id', ['delete' => 'restrict', 'update' => 'restrict']);
-
-        $table->addColumn('nom','text',['null' => false]);
-
-        $table->addColumn('prix_achat', 'decimal',['null' => false]);
-
-        $table->addColumn('pourcentage_marge','decimal',['null' => false]);
-
-        $table->addColumn('user_id', 'integer', ['null' => false]);
-
-        $table->addColumn('derniere_date_modification', 'datetime', ['null' => false]);
-
-        $table->addColumn('date_in','datetime',['null' => false]);
-
-        $table->addColumn('date_out','datetime',['null' => false]);
-
-        $table->create();
+        $this->table('composant')
+            ->addColumn('famille_composant_id','integer', ['null' => true])
+            ->addForeignKey('famille_composant_id', 'famille_composant','id', ['delete' => 'restrict', 'update' => 'restrict'])
+            ->addColumn('tva_id','integer', ['null' => false])
+            ->addForeignKey('tva_id', 'tva','id', ['delete' => 'restrict', 'update' => 'restrict'])
+            ->addColumn('fournisseur_id','integer', ['null' => false])
+            ->addForeignKey('fournisseur_id', 'fournisseur','id', ['delete' => 'restrict', 'update' => 'restrict'])
+            ->addColumn('nom','text',['null' => false])
+            ->addColumn('prix_achat', 'decimal',['null' => false])
+            ->addColumn('pourcentage_marge','decimal',['null' => false])
+            ->addColumn('user_id', 'integer', ['null' => true])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
+            ->addColumn('date_in','datetime',['null' => true])
+            ->addColumn('date_out','datetime',['null' => true])
+            ->create();
     }
 }

@@ -24,9 +24,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js')
+    <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js') ?>
     <?= $this->Html->meta('icon') ?>
 
+    <?= $this->Html->css('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css') ?>
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('style.css') ?>
 
@@ -37,7 +38,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <h1><a href=""><?= $this->fetch('title') ?></a></h1>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div class="container">
         <?= $this->fetch('content') ?>
     </div>
     <footer>

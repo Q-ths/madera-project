@@ -14,41 +14,16 @@ class CreateElement extends AbstractMigration
     {
         $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 0');
 
-        $table = $this->table('element');
-
-        $table->addColumn('devis_id', 'integer', [
-            'null' => false
-        ]);
-        $table->addForeignKey('devis_id','devis','id', ['update' => 'RESTRICT', 'delete' => 'RESTRICT']);
-
-        $table->addColumn('libelle_module','text', [
-            'null' => false,
-        ]);
-
-        $table->addColumn('cctp','text', [
-            'null' => false,
-        ]);
-
-        $table->addColumn('unite','integer', [
-            'null' => false,
-        ]);
-
-        $table->addColumn('quanite','integer', [
-            'null' => false,
-        ]);
-
-        $table->addColumn('coupe_principe','text', [
-            'null' => false,
-        ]);
-
-        $table->addColumn('prix_ht','decimal', [
-            'null' => false,
-        ]);
-
-        $table->addColumn('tva','decimal', [
-            'null' => false,
-        ]);
-
-        $table->create();
+         $this->table('element')
+            ->addColumn('devis_id', 'integer', ['null' => false])
+            ->addForeignKey('devis_id','devis','id', ['update' => 'RESTRICT', 'delete' => 'RESTRICT'])
+            ->addColumn('libelle_module','text', ['null' => false,])
+            ->addColumn('cctp','text', ['null' => false,])
+            ->addColumn('unite','integer', ['null' => false,])
+            ->addColumn('quanite','integer', ['null' => false,])
+            ->addColumn('coupe_principe','text', ['null' => false,])
+            ->addColumn('prix_ht','decimal', ['null' => false,])
+            ->addColumn('tva','decimal', ['null' => false,])
+            ->create();
     }
 }

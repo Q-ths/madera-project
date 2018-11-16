@@ -12,21 +12,14 @@ class CreateProjet extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('projet');
-
-        $table->addColumn('client_id', 'integer', ['null' => false]);
-        $table->addForeignKey('client_id','client','id',['update' => 'restrict', 'delete' => 'restrict']);
-
-        $table->addColumn('reference','string', ['null' => false, 'length'=> 25]);
-
-        $table->addColumn('date_creation','datetime', ['null' => false]);
-
-        $table->addColumn('nom','text', ['null' => false]);
-
-        $table->addColumn('user_id', 'integer', ['null' => false]);
-
-        $table->addColumn('derniere_date_modification', 'datetime', ['null' => false]);
-
-        $table->create();
+         $this->table('projet')
+            ->addColumn('client_id', 'integer', ['null' => false])
+            ->addForeignKey('client_id','client','id',['update' => 'restrict', 'delete' => 'restrict'])
+            ->addColumn('reference','string', ['null' => false, 'length'=> 25])
+            ->addColumn('date_creation','datetime', ['null' => false])
+            ->addColumn('nom','text', ['null' => false])
+            ->addColumn('user_id', 'integer', ['null' => true])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
+            ->create();
     }
 }

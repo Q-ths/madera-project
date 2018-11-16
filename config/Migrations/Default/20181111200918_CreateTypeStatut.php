@@ -12,10 +12,8 @@ class CreateTypeStatut extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('type_statut');
-
-        $table->addColumn('libelle','text',['null' => false]);
-
-        $table->create();
+        $this->table('type_statut')
+            ->addColumn('libelle','text',['null' => false])
+            ->create();
     }
 }

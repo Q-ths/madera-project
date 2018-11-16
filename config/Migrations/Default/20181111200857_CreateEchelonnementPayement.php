@@ -12,18 +12,11 @@ class CreateEchelonnementPayement extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('echelonnement_payement');
-
-        $table->addColumn('type_echelonnement_payement_id','integer',[
-            'null' => false
-        ]);
-        $table->addForeignKey('type_echelonnement_payement_id','type_echelonnement_payement','id', ['update' => 'restrict','delete' => 'restrict']);
-
-        $table->addColumn('devis_id','integer',[
-            'null' => false
-        ]);
-        $table->addForeignKey('devis_id','devis','id', ['update' => 'restrict','delete' => 'restrict']);
-
-        $table->create();
+         $this->table('echelonnement_payement')
+            ->addColumn('type_echelonnement_payement_id','integer',['null' => false])
+            ->addForeignKey('type_echelonnement_payement_id','type_echelonnement_payement','id', ['update' => 'restrict','delete' => 'restrict'])
+            ->addColumn('devis_id','integer',['null' => false])
+            ->addForeignKey('devis_id','devis','id', ['update' => 'restrict','delete' => 'restrict'])
+            ->create();
     }
 }

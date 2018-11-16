@@ -12,15 +12,12 @@ class CreateUser extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('user');
-
-        $table
+        $this->table('user')
             ->addColumn('email','text', ['null' => false])
             ->addColumn('password','string', ['null' => false, 'length' => 25])
             ->addColumn('nom', 'text', ['null' => false])
             ->addColumn('prenom', 'text', ['null' => false])
-            ->addColumn('poste', 'string', ['null' => false, 'length' => 255]);
-
-        $table->create();
+            ->addColumn('poste', 'string', ['null' => false, 'length' => 255])
+            ->create();
     }
 }

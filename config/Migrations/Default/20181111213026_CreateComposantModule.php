@@ -12,15 +12,12 @@ class CreateComposantModule extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('composant_module');
-
-        $table->addColumn('module_id','integer', ['null' => false]);
-        $table->addForeignKey('module_id','module','id', ['delete' => 'restrict', 'update' => 'restrict']);
-
-        $table->addColumn('composant_id','integer', ['null' => false]);
-        $table->addForeignKey('composant_id','composant','id', ['delete' => 'restrict', 'update' => 'restrict']);
-
-        $table->create();
+        $this->table('composant_module')
+            ->addColumn('module_id','integer', ['null' => false])
+            ->addForeignKey('module_id','module','id', ['delete' => 'restrict', 'update' => 'restrict'])
+            ->addColumn('composant_id','integer', ['null' => false])
+            ->addForeignKey('composant_id','composant','id', ['delete' => 'restrict', 'update' => 'restrict'])
+            ->create();
 
         $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 1');
     }

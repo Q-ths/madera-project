@@ -12,18 +12,12 @@ class CreateTypeCouverture extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('type_couverture');
-
-        $table->addColumn('nom','text',['null' => false]);
-
-        $table->addColumn('user_id', 'integer', ['null' => false]);
-
-        $table->addColumn('derniere_date_modification', 'datetime', ['null' => false]);
-
-        $table->addColumn('date_in','datetime',['null' => false]);
-
-        $table->addColumn('date_out','datetime',['null' => false]);
-
-        $table->create();
+         $this->table('type_couverture')
+            ->addColumn('nom','text',['null' => false])
+            ->addColumn('user_id', 'integer', ['null' => false])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => false])
+            ->addColumn('date_in','datetime',['null' => false])
+            ->addColumn('date_out','datetime',['null' => false])
+            ->create();
     }
 }

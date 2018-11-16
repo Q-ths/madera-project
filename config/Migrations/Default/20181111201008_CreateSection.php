@@ -12,23 +12,15 @@ class CreateSection extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('section');
-
-        $table->addColumn('module_id','integer', ['null' => false]);
-        $table->addForeignKey('module_id', 'module','id', ['delete' => 'restrict', 'update' => 'restrict']);
-
-        $table->addColumn('longueur','decimal',['null' => false]);
-
-        $table->addColumn('angle_entrant','decimal',['null' => false]);
-
-        $table->addColumn('user_id', 'integer', ['null' => false]);
-
-        $table->addColumn('derniere_date_modification', 'datetime', ['null' => false]);
-
-        $table->addColumn('date_in','datetime',['null' => false]);
-
-        $table->addColumn('date_out','datetime',['null' => false]);
-
-        $table->create();
+         $this->table('section')
+            ->addColumn('module_id','integer', ['null' => false])
+            ->addForeignKey('module_id', 'module','id', ['delete' => 'restrict', 'update' => 'restrict'])
+            ->addColumn('longueur','decimal',['null' => false])
+            ->addColumn('angle_entrant','decimal',['null' => false])
+            ->addColumn('user_id', 'integer', ['null' => true])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
+            ->addColumn('date_in','datetime',['null' => true])
+            ->addColumn('date_out','datetime',['null' => true])
+            ->create();
     }
 }

@@ -12,48 +12,17 @@ class CreateFournisseur extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('fournisseur');
-
-        $table->addColumn('nom','text', [
-            'null' => false
-        ]);
-
-        $table->addColumn('prenom','text',[
-            'null' => false
-        ]);
-
-        $table->addColumn('adresse_numero','integer', [
-            'null' => false
-        ]);
-
-        $table->addColumn('adresse', 'text', [
-            'null' => false
-        ]);
-
-        $table->addColumn('code_postal', 'integer', [
-            'null' => false
-        ]);
-
-        $table->addColumn('ville', 'text', [
-            'null' => false
-        ]);
-
-        $table->addColumn('email', 'text', [
-            'null' => false
-        ]);
-
-        $table->addColumn('telephone', 'integer', [
-            'null' => false
-        ]);
-
-        $table->addColumn('user_id', 'integer', [
-            'null' => false
-        ]);
-
-        $table->addColumn('derniere_date_modification', 'datetime', [
-            'null' => false
-        ]);
-
-        $table->create();
+        $this->table('fournisseur')
+            ->addColumn('nom','text', ['null' => false])
+            ->addColumn('prenom','text',['null' => false])
+            ->addColumn('adresse_numero','integer', ['null' => false])
+            ->addColumn('adresse', 'text', ['null' => false])
+            ->addColumn('code_postal', 'integer', ['null' => false])
+            ->addColumn('ville', 'text', ['null' => false])
+            ->addColumn('email', 'text', ['null' => false])
+            ->addColumn('telephone', 'integer', ['null' => false])
+            ->addColumn('user_id', 'integer', ['null' => true])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
+            ->create();
     }
 }
