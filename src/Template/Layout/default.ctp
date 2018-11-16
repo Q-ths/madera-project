@@ -13,7 +13,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Madera - ';
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,14 +21,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
+        <?= $cakeDescription ?>
         <?= $this->fetch('title') ?>
     </title>
+    <?= $this->Html->script('https://code.jquery.com/jquery-3.3.1.min.js') ?>
     <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js') ?>
+    <?= $this->Html->script('https://cdn.jsdelivr.net/npm/bootstrap-table@1.12.1/dist/bootstrap-table.min.js') ?>
+    <?= $this->Html->script('https://cdn.bootcss.com/bootstrap-table/1.12.1/locale/bootstrap-table-fr-FR.min.js') ?>
+    <?= $this->Html->script('madera.js') ?>
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css') ?>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <?= $this->Html->css('https://cdn.bootcss.com/bootstrap-table/1.12.1/bootstrap-table.min.css') ?>
+    <?= $this->Html->css('https://use.fontawesome.com/releases/v5.5.0/css/all.css') ?>
+    <?= $this->Html->css('madera.css') ?>
     <!--<?= $this->Html->css('base.css') ?>-->
     <!--<?= $this->Html->css('style.css') ?>-->
 
@@ -53,7 +59,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <li class="nav-item active">
                         <?= $this->Html->link(
                             'Accueil',
-                            ['controller' => 'Dashboards', 'action' => 'index'],
+                            ['controller' => 'Main', 'action' => 'home'],
                             ['class' => 'nav-link']
                         )?>
                     </li>
@@ -87,7 +93,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </div>
         </nav>
     </header>
-
+    <br>
     <?= $this->Flash->render() ?>
     <div class="container">
         <?= $this->fetch('content') ?>
