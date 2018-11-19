@@ -1,0 +1,60 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #707070;
+}
+
+.container, .row {
+    width: 100%;
+    height:100%;
+}
+
+.full-width  {
+    width: 100%;
+}
+
+#form-connexion {
+    margin: 4vh;
+
+}
+
+#row-connexion {
+    background-color: white;
+    box-shadow: inset white;
+    border-color: white;
+    border-radius: 6px;
+}
+
+.container-forgot-password {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.forgot-password {
+    text-underline: none;
+    color: #707070;
+}
+
+#container-btn-submit {
+    padding-top: 2vh;
+}
+
+#container-logo-connexion {
+    text-align: center;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+
+#logo-connexion
+{
+    width:50%;
+    text-align: center;
+
+}
+
+.margin-alert-connexion {
+    margin-top: 2vh;
+}
+
+
+
