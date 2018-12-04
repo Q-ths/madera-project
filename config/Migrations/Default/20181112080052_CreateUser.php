@@ -14,7 +14,7 @@ class CreateUser extends AbstractMigration
     {
         $this->table('user')
             ->addColumn('email','text', ['null' => false])
-            ->addColumn('password','string', ['null' => false, 'length' => 25])
+            ->addColumn('password','text', ['null' => false])
             ->addColumn('nom', 'text', ['null' => false])
             ->addColumn('prenom', 'text', ['null' => false])
             ->addColumn('poste', 'string', ['null' => false, 'length' => 255])
