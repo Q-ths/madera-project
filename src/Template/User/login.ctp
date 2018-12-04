@@ -38,12 +38,14 @@
 
 
 <script>
+    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
     var app = angular.module('connexion', [])
     .controller('FormConnexion', ['$scope', function ($scope) {
        $scope.validate = function ($user) {
            header = new Headers({
                "Content-Type": "application/json",
-               "Access-Control-Allow-Origin" : "*"
+               "Access-Control-Allow-Origin" : "*",
+               'X-CSRF-Token': csrfToken
            });
 
 

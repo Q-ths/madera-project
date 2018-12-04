@@ -20,8 +20,7 @@ class UserController extends AppController
      */
     public function index()
     {
-        $user = $this->paginate($this->User);
-
+        $user = $this->User->find()->enableHydration(false)->all()->toArray();
         $this->set(compact('user'));
     }
 
@@ -114,10 +113,10 @@ class UserController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                $this->response->httpCodes(201);
+                $this->response->withStatus(201);
             }
             else {
-                $this->response->statusCode(404);
+                $this->response->withStatus(404);
             }
         }
     }
