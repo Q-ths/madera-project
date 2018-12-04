@@ -19,5 +19,7 @@ class CreateUser extends AbstractMigration
             ->addColumn('prenom', 'text', ['null' => false])
             ->addColumn('poste', 'string', ['null' => false, 'length' => 255])
             ->create();
+
+        $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 1');
     }
 }

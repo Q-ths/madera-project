@@ -18,7 +18,5 @@ class CreateComposantModule extends AbstractMigration
             ->addColumn('composant_id','integer', ['null' => false])
             ->addForeignKey('composant_id','composant','id', ['delete' => 'restrict', 'update' => 'restrict'])
             ->create();
-
-        $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 1');
     }
 }
