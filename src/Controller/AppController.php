@@ -45,22 +45,22 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-        $this->loadComponent('Auth', [
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
-                    ]
-                ],
-                'all' => ['userModel' => 'User'],
-            ],
-            'loginAction' => [
-                'controller' => 'User',
-                'action' => 'login'
-            ],
-            // Si pas autorisé, on renvoit sur la page précédente
-            'unauthorizedRedirect' => $this->referer()
-        ]);
+//        $this->loadComponent('Auth', [
+//            'authenticate' => [
+//                'Form' => [
+//                    'fields' => [
+//                        'username' => 'email',
+//                        'password' => 'password'
+//                    ]
+//                ],
+//                'all' => ['userModel' => 'User'],
+//            ],
+//            'loginAction' => [
+//                'controller' => 'User',
+//                'action' => 'login'
+//            ],
+//            // Si pas autorisé, on renvoit sur la page précédente
+//            'unauthorizedRedirect' => $this->referer()
+//        ]);
     }
 }
