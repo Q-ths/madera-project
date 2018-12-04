@@ -13,15 +13,23 @@ use Cake\Controller\Component\AuthComponent;
 class UserController extends AppController
 {
 
+    public function index()
+    {
+
+    }
+
     /**
-     * Index method
+     * Get method
      *
      * @return \Cake\Http\Response|void
      */
-    public function index()
+    public function get()
     {
-        $user = $this->User->find()->enableHydration(false)->all()->toArray();
-        $this->set(compact('user'));
+        $this->disableAutoRender();
+
+        $users = $this->User->find()->enableHydration(false)->all()->toArray();
+        if($users)
+            return $this->renderToJson(json_encode($users));
     }
 
     /**
@@ -33,11 +41,12 @@ class UserController extends AppController
      */
     public function view($id = null)
     {
-        $user = $this->User->get($id, [
-            'contain' => ['Cctp', 'Client', 'Composant', 'CoupePrincipe', 'Devis', 'FamilleComposant', 'Fournisseur', 'Gamme', 'Module', 'Projet', 'Section', 'Tva', 'TypeCouverture', 'TypeFinissionExterieur', 'TypeIsolant', 'TypeQualiteHuisserie']
-        ]);
+        $user = $this->User->get($id);
 
-        $this->set('user', $user);
+        if($user)
+            return $this->renderToJson(json_encode($user));
+        else
+            return $this->response->withStatus(400);
     }
 
     /**
@@ -75,11 +84,10 @@ class UserController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->User->patchEntity($user, $this->request->getData());
             if ($this->User->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $users = $this->User->find()->enableHydration(false)->all()->toArray();
+                return $this->renderToJson(json_encode($users));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            return $this->response->withStatus(400);
         }
         $this->set(compact('user'));
     }
@@ -96,12 +104,11 @@ class UserController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->User->get($id);
         if ($this->User->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $users = $this->User->findAll()->enableHydration(false)->all()->toArray();
+            return $this->renderToJson(json_encode($users));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            return $this->response->withStatus(400);
         }
-
-        return $this->redirect(['action' => 'index']);
     }
 
     public function login()

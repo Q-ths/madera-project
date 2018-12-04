@@ -24,7 +24,8 @@ $cakeDescription = 'Madera - ';
         <?= $cakeDescription ?>
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->script('https://code.jquery.com/jquery-3.3.1.min.js') ?>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <?= $this->Html->script('https://ajax.googleapis.com/ajax/libs/angularjs/1.7.4/angular.min.js') ?>
     <?= $this->Html->script('https://cdn.jsdelivr.net/npm/bootstrap-table@1.12.1/dist/bootstrap-table.min.js') ?>
     <?= $this->Html->script('https://cdn.bootcss.com/bootstrap-table/1.12.1/locale/bootstrap-table-fr-FR.min.js') ?>
@@ -49,7 +50,6 @@ $cakeDescription = 'Madera - ';
                 <?= $this->Html->image('madera-logo.png', ['alt' => 'CakePHP', 'style' => 'width: 50px;']) ?>
             </a>
 
-            <a class="navbar-brand" href="#">MADERA</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -74,6 +74,13 @@ $cakeDescription = 'Madera - ';
                         <?= $this->Html->link(
                             'Suivi',
                             ['controller' => 'Suivis', 'action' => 'index'],
+                            ['class' => 'nav-link']
+                        )?>
+                    </li>
+                    <li class="nav-item">
+                        <?= $this->Html->link(
+                            'Utilisateurs',
+                            ['controller' => 'User', 'action' => 'index'],
                             ['class' => 'nav-link']
                         )?>
                     </li>
