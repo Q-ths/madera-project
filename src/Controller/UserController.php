@@ -52,19 +52,17 @@ class UserController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
         $user = $this->User->newEntity();
         if ($this->request->is('post')) {
             $user = $this->User->patchEntity($user, $this->request->getData());
-            if ($this->User->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            if ($this->User->saveOrFail($user)) {
+                $users = $this->User->find()->enableHydration(false)->all()->toArray();
+                return $this->renderToJson(json_encode($users));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            return $this->response->withStatus(400);
         }
         $this->set(compact('user'));
     }

@@ -16,6 +16,29 @@
         <strong>L'utilisateur a été supprimé.</strong>
     </div>
 
+    <!-- ALERT ADD -->
+    <div class="alert alert-danger margin-alert-add d-none" role="alert" id="alert-error-add">
+        <strong>Une erreur a été rencontrée. Merci de contacter le service informatique si l'erreur persiste.</strong>
+    </div>
+    <div class="alert alert-success margin-alert-add d-none" role="alert" id="alert-success-add">
+        <strong>L'utilisateur à été crée.</strong>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?=$this->Url->build('/', true)?>">Madera</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="col-md-5 offset-md-2">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modal-user-create">Créer un utilisateur</button>
+        </div>
+    </div>
+
     <table class="table" data-pagination="true" data-row-style="striped">
         <thead class="thead-light">
         <tr>
@@ -62,7 +85,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal fade" id="modal-user" tabindex="-1" role="dialog" aria-labelledby="modal-user-label" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -94,7 +116,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
                             </div>
-                            <input name="input" ng-model="user.nom"  value="user.nom"required class="form-control" placeholder="Nom" type="text">
+                            <input name="input" ng-model="user.nom"  value="user.nom" required class="form-control" placeholder="Nom" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -102,7 +124,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
                             </div>
-                            <input name="input" ng-model="user.prenom" valuel="user.prenom" required class="form-control" placeholder="Prenom" type="text">
+                            <input name="input" ng-model="user.prenom" value="user.prenom" required class="form-control" placeholder="Prenom" type="text">
                         </div>
                     </div>
                     <div class="form-group">
@@ -117,6 +139,65 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-user">Annuler</button>
                     <button type="button" class="btn btn-primary" ng-click="saveUser()">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-user-create" tabindex="-1" role="dialog" aria-labelledby="modal-user-create-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-user-create-label">Créer un utilisateur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-fw fa-envelope"></i></div>
+                            </div>
+                            <input name="input" ng-model="user.email" required class="form-control" placeholder="Email" type="email" value="user.email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-fw fa-lock"></i></div>
+                            </div>
+                            <input name="input" ng-model="user.password" required class="form-control" placeholder="Mot de passe" type="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
+                            </div>
+                            <input name="input" ng-model="user.nom" required class="form-control" placeholder="Nom" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
+                            </div>
+                            <input name="input" ng-model="user.prenom" required class="form-control" placeholder="Prenom" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
+                            </div>
+                            <input name="input" ng-model="user.poste" required class="form-control" placeholder="Rôle" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-user">Annuler</button>
+                    <button type="button" class="btn btn-primary" ng-click="createUser()">Créer</button>
                 </div>
             </div>
         </div>
@@ -223,13 +304,45 @@
                 .then(function ($response) {
                     $('#modal-progress').modal('hide');
                     if($response.status == 200) {
-
+                        $response.json().then(function (data) {
+                            $scope.users  = data;
+                            $scope.$apply();
+                        });
                         $('#alert-success-delete').removeClass('d-none');
                         $('#alert-error-delete').addClass('d-none');
                     } else {
                         $('#alert-error-delete').removeClass('d-none');
                     }
                 });
+        }
+        
+        $scope.createUser = function () {
+            /* En-tête de la requête ASYNC */
+            let header = new Headers({
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin" : "*",
+                'X-CSRF-Token': csrfToken
+            });
+
+            $('#modal-user-create').modal('hide');
+            $('#modal-progress').modal();
+
+            fetch('/user/add',{headers:header, method:'post', body:JSON.stringify($scope.user)})
+                .then(function ($response) {
+                    if($response.status == 200) {
+                        $response.json().then(function (data) {
+                            $scope.users  = data;
+                            $scope.$apply();
+                        });
+                        $('#modal-progress').modal('hide');
+
+                        $('#alert-success-add').removeClass('d-none');
+                        $('#alert-error-add').addClass('d-none');
+
+                    } else {
+                        $('#alert-error-add').removeClass('d-none');
+                    }
+                })
         }
     }]);
     angular.bootstrap(document,['users']);
