@@ -17,10 +17,10 @@ class CreateSection extends AbstractMigration
             ->addForeignKey('module_id', 'module','id', ['delete' => 'restrict', 'update' => 'restrict'])
             ->addColumn('longueur','decimal',['null' => false])
             ->addColumn('angle_entrant','decimal',['null' => false])
-            ->addColumn('user_id', 'integer', ['null' => true])
-            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
-            ->addColumn('date_in','datetime',['null' => true])
-            ->addColumn('date_out','datetime',['null' => true])
+            ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
+            ->addColumn('date_in','datetime',['null' => true,'default' => null])
+            ->addColumn('date_out','datetime',['null' => true, 'default' => null])
             ->create();
     }
 }

@@ -18,8 +18,8 @@ class CreateProjet extends AbstractMigration
             ->addColumn('reference','string', ['null' => false, 'length'=> 25])
             ->addColumn('date_creation','datetime', ['null' => false])
             ->addColumn('nom','text', ['null' => false])
-            ->addColumn('user_id', 'integer', ['null' => true])
-            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
+            ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
             ->create();
     }
 }

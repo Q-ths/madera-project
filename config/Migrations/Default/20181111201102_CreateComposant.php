@@ -13,7 +13,7 @@ class CreateComposant extends AbstractMigration
     public function change()
     {
         $this->table('composant')
-            ->addColumn('famille_composant_id','integer', ['null' => true])
+            ->addColumn('famille_composant_id','integer', ['null' => true,'default' => null])
             ->addForeignKey('famille_composant_id', 'famille_composant','id', ['delete' => 'restrict', 'update' => 'restrict'])
             ->addColumn('tva_id','integer', ['null' => false])
             ->addForeignKey('tva_id', 'tva','id', ['delete' => 'restrict', 'update' => 'restrict'])
@@ -22,10 +22,10 @@ class CreateComposant extends AbstractMigration
             ->addColumn('nom','text',['null' => false])
             ->addColumn('prix_achat', 'decimal',['null' => false])
             ->addColumn('pourcentage_marge','decimal',['null' => false])
-            ->addColumn('user_id', 'integer', ['null' => true])
-            ->addColumn('derniere_date_modification', 'datetime', ['null' => true])
-            ->addColumn('date_in','datetime',['null' => true])
-            ->addColumn('date_out','datetime',['null' => true])
+            ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
+            ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
+            ->addColumn('date_in','datetime',['null' => true,'default' => null])
+            ->addColumn('date_out','datetime',['null' => true,'default' => null])
             ->create();
     }
 }
