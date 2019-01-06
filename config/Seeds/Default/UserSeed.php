@@ -26,7 +26,6 @@ class UserSeed extends AbstractSeed
                 'password' => (new DefaultPasswordHasher)->hash("admin"),
                 'nom' => 'admin',
                 'prenom' => 'admin',
-                'poste' => 'Administrateur'
             ]
         ];
 
