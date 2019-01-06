@@ -20,6 +20,7 @@ class TvaSeed extends AbstractSeed
     {
         $data = [
             [
+                'nom' => 'Tva général',
                 'pourcentage_tva' => '20',
                 'user_id' => null,
                 'derniere_date_modification' => null,
@@ -27,6 +28,7 @@ class TvaSeed extends AbstractSeed
                 'date_out' => null
             ],
             [
+                'nom' => 'Tva test 1',
                 'pourcentage_tva' => '15',
                 'user_id' => null,
                 'derniere_date_modification' => null,
@@ -34,6 +36,7 @@ class TvaSeed extends AbstractSeed
                 'date_out' => null
             ],
             [
+                'nom' => 'Tva test 2',
                 'pourcentage_tva' => '7',
                 'user_id' => null,
                 'derniere_date_modification' => null,
