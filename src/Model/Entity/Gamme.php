@@ -8,19 +8,15 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $nom
- * @property int $type_finission_exterieur_id
+ * @property int $type_finition_id
  * @property int $type_isolant_id
- * @property int $type_couverture_id
- * @property int $type_qualite_huisserie_id
  * @property int $user_id
  * @property \Cake\I18n\FrozenTime $derniere_date_modification
  * @property \Cake\I18n\FrozenTime $date_in
  * @property \Cake\I18n\FrozenTime $date_out
  *
- * @property \App\Model\Entity\TypeFinissionExterieur $type_finission_exterieur
+ * @property \App\Model\Entity\TypeFinition $type_finition
  * @property \App\Model\Entity\TypeIsolant $type_isolant
- * @property \App\Model\Entity\TypeCouverture $type_couverture
- * @property \App\Model\Entity\TypeQualiteHuisserie $type_qualite_huisserie
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Module[] $module
  */
@@ -38,18 +34,14 @@ class Gamme extends Entity
      */
     protected $_accessible = [
         'nom' => true,
-        'type_finission_exterieur_id' => true,
+        'type_finition_id' => true,
         'type_isolant_id' => true,
-        'type_couverture_id' => true,
-        'type_qualite_huisserie_id' => true,
         'user_id' => true,
         'derniere_date_modification' => true,
         'date_in' => true,
         'date_out' => true,
-        'type_finission_exterieur' => true,
+        'type_finition' => true,
         'type_isolant' => true,
-        'type_couverture' => true,
-        'type_qualite_huisserie' => true,
         'user' => true,
         'module' => true
     ];

@@ -60,7 +60,7 @@ class TypeEchelonnementPayementTable extends Table
             ->notEmpty('libelle');
 
         $validator
-            ->decimal('pourcentage_payement')
+            ->numeric('pourcentage_payement')
             ->requirePresence('pourcentage_payement', 'create')
             ->notEmpty('pourcentage_payement');
 

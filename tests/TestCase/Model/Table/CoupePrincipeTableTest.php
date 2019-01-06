@@ -25,7 +25,7 @@ class CoupePrincipeTableTest extends TestCase
      */
     public $fixtures = [
         'app.coupe_principe',
-        'app.users',
+        'app.user',
         'app.module'
     ];
 

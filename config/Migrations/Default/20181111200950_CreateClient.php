@@ -20,7 +20,7 @@ class CreateClient extends AbstractMigration
             ->addColumn('code_postal', 'integer', ['null' => false])
             ->addColumn('ville', 'text', ['null' => false])
             ->addColumn('email', 'text', ['null' => false])
-            ->addColumn('telephone', 'integer', ['null' => false])
+            ->addColumn('telephone', 'text', ['null' => false])
             ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
             ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
             ->create();

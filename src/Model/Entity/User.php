@@ -2,7 +2,6 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * User Entity
@@ -14,22 +13,19 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property string $prenom
  * @property string $poste
  *
- * @property \App\Model\Entity\Cctp[] $cctp
  * @property \App\Model\Entity\Client[] $client
  * @property \App\Model\Entity\Composant[] $composant
- * @property \App\Model\Entity\CoupePrincipe[] $coupe_principe
  * @property \App\Model\Entity\Devi[] $devis
  * @property \App\Model\Entity\FamilleComposant[] $famille_composant
  * @property \App\Model\Entity\Fournisseur[] $fournisseur
  * @property \App\Model\Entity\Gamme[] $gamme
  * @property \App\Model\Entity\Module[] $module
+ * @property \App\Model\Entity\ModuleComposantProjet[] $module_composant_projet
+ * @property \App\Model\Entity\ModuleProjet[] $module_projet
  * @property \App\Model\Entity\Projet[] $projet
- * @property \App\Model\Entity\Section[] $section
  * @property \App\Model\Entity\Tva[] $tva
- * @property \App\Model\Entity\TypeCouverture[] $type_couverture
- * @property \App\Model\Entity\TypeFinissionExterieur[] $type_finission_exterieur
+ * @property \App\Model\Entity\TypeFinition[] $type_finition
  * @property \App\Model\Entity\TypeIsolant[] $type_isolant
- * @property \App\Model\Entity\TypeQualiteHuisserie[] $type_qualite_huisserie
  */
 class User extends Entity
 {
@@ -49,22 +45,19 @@ class User extends Entity
         'nom' => true,
         'prenom' => true,
         'poste' => true,
-        'cctp' => true,
         'client' => true,
         'composant' => true,
-        'coupe_principe' => true,
         'devis' => true,
         'famille_composant' => true,
         'fournisseur' => true,
         'gamme' => true,
         'module' => true,
+        'module_composant_projet' => true,
+        'module_projet' => true,
         'projet' => true,
-        'section' => true,
         'tva' => true,
-        'type_couverture' => true,
-        'type_finission_exterieur' => true,
-        'type_isolant' => true,
-        'type_qualite_huisserie' => true
+        'type_finition' => true,
+        'type_isolant' => true
     ];
 
     /**
@@ -75,13 +68,4 @@ class User extends Entity
     protected $_hidden = [
         'password'
     ];
-
-    protected function _setPassword($value)
-    {
-        if (strlen($value)) {
-            $hasher = new DefaultPasswordHasher();
-
-            return $hasher->hash($value);
-        }
-    }
 }

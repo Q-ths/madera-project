@@ -13,10 +13,11 @@ class CreateTva extends AbstractMigration
     public function change()
     {
         $this->table('tva')
-            ->addColumn('pourcentage_tva','decimal',['null' => false])
+            ->addColumn('nom','text',['null' => false])
+            ->addColumn('pourcentage_tva','float',['null' => false])
             ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
             ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
-            ->addColumn('date_in','datetime',['null' => true,'default' => null])
+            ->addColumn('date_in','datetime',['null' => true,'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('date_out','datetime',['null' => true,'default' => null])
             ->create();
     }

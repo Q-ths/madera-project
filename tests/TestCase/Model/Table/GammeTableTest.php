@@ -25,10 +25,8 @@ class GammeTableTest extends TestCase
      */
     public $fixtures = [
         'app.gamme',
-        'app.type_finission_exterieur',
+        'app.type_finition',
         'app.type_isolant',
-        'app.type_couverture',
-        'app.type_qualite_huisserie',
         'app.users',
         'app.module'
     ];

@@ -6,6 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+
 /**
  * ComposantModule Model
  *
@@ -59,6 +60,11 @@ class ComposantModuleTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->integer('quantite')
+            ->requirePresence('quantite', 'create')
+            ->notEmpty('quantite');
 
         return $validator;
     }

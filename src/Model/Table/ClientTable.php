@@ -39,8 +39,7 @@ class ClientTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Projet', [
             'foreignKey' => 'client_id'
@@ -101,8 +100,7 @@ class ClientTable extends Table
 
         $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         return $validator;
     }

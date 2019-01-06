@@ -5,14 +5,15 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use App\Model\DatabaseTrait\FindEnable;
+use App\Model\DatabaseTrait\FindOrderByActivate;
+
 
 /**
  * Gamme Model
  *
- * @property \App\Model\Table\TypeFinissionExterieurTable|\Cake\ORM\Association\BelongsTo $TypeFinissionExterieur
+ * @property \App\Model\Table\TypeFinitionTable|\Cake\ORM\Association\BelongsTo $TypeFinition
  * @property \App\Model\Table\TypeIsolantTable|\Cake\ORM\Association\BelongsTo $TypeIsolant
- * @property \App\Model\Table\TypeCouvertureTable|\Cake\ORM\Association\BelongsTo $TypeCouverture
- * @property \App\Model\Table\TypeQualiteHuisserieTable|\Cake\ORM\Association\BelongsTo $TypeQualiteHuisserie
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ModuleTable|\Cake\ORM\Association\HasMany $Module
  *
@@ -28,6 +29,9 @@ use Cake\Validation\Validator;
 class GammeTable extends Table
 {
 
+    use FindEnable;
+    use FindOrderByActivate;
+
     /**
      * Initialize method
      *
@@ -42,22 +46,15 @@ class GammeTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('TypeFinissionExterieur', [
-            'foreignKey' => 'type_finission_exterieur_id',
+        $this->belongsTo('TypeFinition', [
+            'foreignKey' => 'type_finition_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('TypeIsolant', [
             'foreignKey' => 'type_isolant_id'
         ]);
-        $this->belongsTo('TypeCouverture', [
-            'foreignKey' => 'type_couverture_id'
-        ]);
-        $this->belongsTo('TypeQualiteHuisserie', [
-            'foreignKey' => 'type_qualite_huisserie_id'
-        ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Module', [
             'foreignKey' => 'gamme_id'
@@ -83,18 +80,15 @@ class GammeTable extends Table
 
         $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         $validator
             ->dateTime('date_in')
-            ->requirePresence('date_in', 'create')
-            ->notEmpty('date_in');
+            ->allowEmpty('date_in');
 
         $validator
             ->dateTime('date_out')
-            ->requirePresence('date_out', 'create')
-            ->notEmpty('date_out');
+            ->allowEmpty('date_out');
 
         return $validator;
     }
@@ -108,10 +102,8 @@ class GammeTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['type_finission_exterieur_id'], 'TypeFinissionExterieur'));
+        $rules->add($rules->existsIn(['type_finition_id'], 'TypeFinition'));
         $rules->add($rules->existsIn(['type_isolant_id'], 'TypeIsolant'));
-        $rules->add($rules->existsIn(['type_couverture_id'], 'TypeCouverture'));
-        $rules->add($rules->existsIn(['type_qualite_huisserie_id'], 'TypeQualiteHuisserie'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

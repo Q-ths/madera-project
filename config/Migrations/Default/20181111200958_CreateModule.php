@@ -13,18 +13,13 @@ class CreateModule extends AbstractMigration
     public function change()
     {
         $this->table('module')
-            ->addColumn('projet_id','integer',['null' => false])
-            ->addForeignKey('projet_id', 'projet', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
-            ->addColumn('cctp_id','integer',['null' => true])
-            ->addForeignKey('cctp_id', 'cctp', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
             ->addColumn('gamme_id','integer',['null' => true])
             ->addForeignKey('gamme_id', 'gamme', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
-            ->addColumn('coupe_principe_id','integer',['null' => true])
-            ->addForeignKey('coupe_principe_id', 'coupe_principe', 'id',  ['delete' => 'restrict','delete' => 'restrict'])
             ->addColumn('nom','text',['null' => false])
+            ->addColumn('marge', 'float',  ['null' => false])
             ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
             ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
-            ->addColumn('date_in','datetime',['null' => true,'default' => null])
+            ->addColumn('date_in','datetime',['null' => true,'default' => 'CURRENT_TIMESTAMP',])
             ->addColumn('date_out','datetime',['null' => true,'default' => null])
             ->create();
     }

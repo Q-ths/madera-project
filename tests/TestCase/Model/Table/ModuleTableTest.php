@@ -25,13 +25,10 @@ class ModuleTableTest extends TestCase
      */
     public $fixtures = [
         'app.module',
-        'app.projet',
-        'app.cctp',
         'app.gamme',
-        'app.coupe_principe',
         'app.users',
-        'app.section',
-        'app.composant'
+        'app.composant',
+        'app.projet'
     ];
 
     /**

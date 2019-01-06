@@ -1,6 +1,8 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\DatabaseTrait\FindEnable;
+use App\Model\DatabaseTrait\FindOrderByActivate;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -27,6 +29,8 @@ use Cake\Validation\Validator;
 class ComposantTable extends Table
 {
 
+    use FindEnable;
+    use FindOrderByActivate;
     /**
      * Initialize method
      *
@@ -53,8 +57,7 @@ class ComposantTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->belongsToMany('Module', [
             'foreignKey' => 'composant_id',
@@ -81,29 +84,26 @@ class ComposantTable extends Table
             ->notEmpty('nom');
 
         $validator
-            ->decimal('prix_achat')
+            ->numeric('prix_achat')
             ->requirePresence('prix_achat', 'create')
             ->notEmpty('prix_achat');
 
         $validator
-            ->decimal('pourcentage_marge')
+            ->numeric('pourcentage_marge')
             ->requirePresence('pourcentage_marge', 'create')
             ->notEmpty('pourcentage_marge');
 
         $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         $validator
             ->dateTime('date_in')
-            ->requirePresence('date_in', 'create')
-            ->notEmpty('date_in');
+            ->allowEmpty('date_in');
 
         $validator
             ->dateTime('date_out')
-            ->requirePresence('date_out', 'create')
-            ->notEmpty('date_out');
+            ->allowEmpty('date_out');
 
         return $validator;
     }

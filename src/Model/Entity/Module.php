@@ -7,23 +7,18 @@ use Cake\ORM\Entity;
  * Module Entity
  *
  * @property int $id
- * @property int $projet_id
- * @property int $cctp_id
  * @property int $gamme_id
- * @property int $coupe_principe_id
  * @property string $nom
+ * @property float $marge
  * @property int $user_id
  * @property \Cake\I18n\FrozenTime $derniere_date_modification
  * @property \Cake\I18n\FrozenTime $date_in
  * @property \Cake\I18n\FrozenTime $date_out
  *
- * @property \App\Model\Entity\Projet $projet
- * @property \App\Model\Entity\Cctp $cctp
  * @property \App\Model\Entity\Gamme $gamme
- * @property \App\Model\Entity\CoupePrincipe $coupe_principe
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Section[] $section
  * @property \App\Model\Entity\Composant[] $composant
+ * @property \App\Model\Entity\Projet[] $projet
  */
 class Module extends Entity
 {
@@ -38,21 +33,16 @@ class Module extends Entity
      * @var array
      */
     protected $_accessible = [
-        'projet_id' => true,
-        'cctp_id' => true,
         'gamme_id' => true,
-        'coupe_principe_id' => true,
         'nom' => true,
+        'marge' => true,
         'user_id' => true,
         'derniere_date_modification' => true,
         'date_in' => true,
         'date_out' => true,
-        'projet' => true,
-        'cctp' => true,
         'gamme' => true,
-        'coupe_principe' => true,
         'user' => true,
-        'section' => true,
-        'composant' => true
+        'composant' => true,
+        'projet' => true
     ];
 }

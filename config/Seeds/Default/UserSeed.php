@@ -30,7 +30,10 @@ class UserSeed extends AbstractSeed
             ]
         ];
 
-        $table = $this->table('user');
+        $table = $this->table('users');
         $table->insert($data)->save();
+
+        $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 1');
+
     }
 }

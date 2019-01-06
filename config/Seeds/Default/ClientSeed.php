@@ -38,8 +38,5 @@ class ClientSeed extends AbstractSeed
 
         $table = $this->table('client');
         $table->insert($data)->save();
-
-//        $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 1');
-
     }
 }

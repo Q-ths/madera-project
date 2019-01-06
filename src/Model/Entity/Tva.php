@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
  * Tva Entity
  *
  * @property int $id
+ * @property string $nom
  * @property float $pourcentage_tva
  * @property int $user_id
  * @property \Cake\I18n\FrozenTime $derniere_date_modification
@@ -29,6 +30,7 @@ class Tva extends Entity
      * @var array
      */
     protected $_accessible = [
+        'nom' => true,
         'pourcentage_tva' => true,
         'user_id' => true,
         'derniere_date_modification' => true,

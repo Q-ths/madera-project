@@ -27,6 +27,7 @@ class ComposantModuleFixture extends TestFixture
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'module_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'composant_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'quantite' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'module_id' => ['type' => 'index', 'columns' => ['module_id'], 'length' => []],
             'composant_id' => ['type' => 'index', 'columns' => ['composant_id'], 'length' => []],
@@ -54,7 +55,8 @@ class ComposantModuleFixture extends TestFixture
             [
                 'id' => 1,
                 'module_id' => 1,
-                'composant_id' => 1
+                'composant_id' => 1,
+                'quantite' => 1
             ],
         ];
         parent::init();

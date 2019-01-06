@@ -23,9 +23,9 @@ class CreateDevis extends AbstractMigration
             ->addColumn('adresse', 'text', ['null' => false])
             ->addColumn('code_postal', 'integer', ['null' => false])
             ->addColumn('ville', 'text', ['null' => false])
-            ->addColumn('pourcentage_remise', 'decimal', ['null' => false])
-            ->addColumn('prix_total_ttc', 'decimal', ['null' => false])
-            ->addColumn('prix_total_ht', 'decimal', ['null' => false])
+            ->addColumn('pourcentage_remise', 'float', ['null' => false])
+            ->addColumn('prix_total_ttc', 'float', ['null' => false])
+            ->addColumn('prix_total_ht', 'float', ['null' => false])
             ->addColumn('user_id', 'integer', ['null' => true, 'default' => null])
             ->addColumn('derniere_date_modification', 'datetime', ['null' => true, 'default' => null])
             ->create();

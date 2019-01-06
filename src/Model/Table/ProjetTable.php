@@ -12,7 +12,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\ClientTable|\Cake\ORM\Association\BelongsTo $Client
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\DevisTable|\Cake\ORM\Association\HasMany $Devis
- * @property \App\Model\Table\ModuleTable|\Cake\ORM\Association\HasMany $Module
+ * @property \App\Model\Table\ModuleTable|\Cake\ORM\Association\BelongsToMany $Module
  *
  * @method \App\Model\Entity\Projet get($primaryKey, $options = [])
  * @method \App\Model\Entity\Projet newEntity($data = null, array $options = [])
@@ -45,14 +45,15 @@ class ProjetTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Devis', [
             'foreignKey' => 'projet_id'
         ]);
-        $this->hasMany('Module', [
-            'foreignKey' => 'projet_id'
+        $this->belongsToMany('Module', [
+            'foreignKey' => 'projet_id',
+            'targetForeignKey' => 'module_id',
+            'joinTable' => 'module_projet'
         ]);
     }
 
@@ -86,8 +87,7 @@ class ProjetTable extends Table
 
         $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         return $validator;
     }

@@ -25,7 +25,7 @@ class CctpTableTest extends TestCase
      */
     public $fixtures = [
         'app.cctp',
-        'app.users',
+        'app.user',
         'app.module'
     ];
 

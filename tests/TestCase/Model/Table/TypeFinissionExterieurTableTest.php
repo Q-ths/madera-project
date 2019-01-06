@@ -1,7 +1,7 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\TypeFinissionExterieurTable;
+use App\Model\Table\TypeFinissionTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
@@ -14,7 +14,7 @@ class TypeFinissionExterieurTableTest extends TestCase
     /**
      * Test subject
      *
-     * @var \App\Model\Table\TypeFinissionExterieurTable
+     * @var \App\Model\Table\TypeFinissionTable
      */
     public $TypeFinissionExterieur;
 
@@ -25,7 +25,7 @@ class TypeFinissionExterieurTableTest extends TestCase
      */
     public $fixtures = [
         'app.type_finission_exterieur',
-        'app.users',
+        'app.user',
         'app.gamme'
     ];
 
@@ -37,7 +37,7 @@ class TypeFinissionExterieurTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('TypeFinissionExterieur') ? [] : ['className' => TypeFinissionExterieurTable::class];
+        $config = TableRegistry::getTableLocator()->exists('TypeFinissionExterieur') ? [] : ['className' => TypeFinissionTable::class];
         $this->TypeFinissionExterieur = TableRegistry::getTableLocator()->get('TypeFinissionExterieur', $config);
     }
 

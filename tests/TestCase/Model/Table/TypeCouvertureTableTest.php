@@ -25,7 +25,7 @@ class TypeCouvertureTableTest extends TestCase
      */
     public $fixtures = [
         'app.type_couverture',
-        'app.users',
+        'app.user',
         'app.gamme'
     ];
 

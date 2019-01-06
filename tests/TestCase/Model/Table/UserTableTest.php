@@ -25,22 +25,17 @@ class UserTableTest extends TestCase
      */
     public $fixtures = [
         'app.user',
-        'app.cctp',
         'app.client',
         'app.composant',
-        'app.coupe_principe',
         'app.devis',
         'app.famille_composant',
         'app.fournisseur',
         'app.gamme',
         'app.module',
         'app.projet',
-        'app.section',
         'app.tva',
-        'app.type_couverture',
-        'app.type_finission_exterieur',
-        'app.type_isolant',
-        'app.type_qualite_huisserie'
+        'app.type_finition',
+        'app.type_isolant'
     ];
 
     /**

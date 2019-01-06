@@ -48,8 +48,7 @@ class DevisTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
     }
 
@@ -96,24 +95,23 @@ class DevisTable extends Table
             ->notEmpty('ville');
 
         $validator
-            ->decimal('pourcentage_remise')
+            ->numeric('pourcentage_remise')
             ->requirePresence('pourcentage_remise', 'create')
             ->notEmpty('pourcentage_remise');
 
         $validator
-            ->decimal('prix_total_ttc')
+            ->numeric('prix_total_ttc')
             ->requirePresence('prix_total_ttc', 'create')
             ->notEmpty('prix_total_ttc');
 
         $validator
-            ->decimal('prix_total_ht')
+            ->numeric('prix_total_ht')
             ->requirePresence('prix_total_ht', 'create')
             ->notEmpty('prix_total_ht');
 
         $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         return $validator;
     }
@@ -132,9 +130,5 @@ class DevisTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
-    }
-
-    public function getAll(){
-        return $this->find('all');
     }
 }

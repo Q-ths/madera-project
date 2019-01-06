@@ -5,17 +5,17 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use App\Model\DatabaseTrait\FindEnable;
+use App\Model\DatabaseTrait\FindOrderByActivate;
+
 
 /**
  * Module Model
  *
- * @property \App\Model\Table\ProjetTable|\Cake\ORM\Association\BelongsTo $Projet
- * @property \App\Model\Table\CctpTable|\Cake\ORM\Association\BelongsTo $Cctp
  * @property \App\Model\Table\GammeTable|\Cake\ORM\Association\BelongsTo $Gamme
- * @property \App\Model\Table\CoupePrincipeTable|\Cake\ORM\Association\BelongsTo $CoupePrincipe
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\SectionTable|\Cake\ORM\Association\HasMany $Section
  * @property \App\Model\Table\ComposantTable|\Cake\ORM\Association\BelongsToMany $Composant
+ * @property \App\Model\Table\ProjetTable|\Cake\ORM\Association\BelongsToMany $Projet
  *
  * @method \App\Model\Entity\Module get($primaryKey, $options = [])
  * @method \App\Model\Entity\Module newEntity($data = null, array $options = [])
@@ -28,6 +28,8 @@ use Cake\Validation\Validator;
  */
 class ModuleTable extends Table
 {
+    use FindEnable;
+    use FindOrderByActivate;
 
     /**
      * Initialize method
@@ -43,30 +45,21 @@ class ModuleTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Projet', [
-            'foreignKey' => 'projet_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Cctp', [
-            'foreignKey' => 'cctp_id'
-        ]);
         $this->belongsTo('Gamme', [
             'foreignKey' => 'gamme_id'
         ]);
-        $this->belongsTo('CoupePrincipe', [
-            'foreignKey' => 'coupe_principe_id'
-        ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Section', [
-            'foreignKey' => 'module_id'
+            'foreignKey' => 'user_id'
         ]);
         $this->belongsToMany('Composant', [
             'foreignKey' => 'module_id',
             'targetForeignKey' => 'composant_id',
             'joinTable' => 'composant_module'
+        ]);
+        $this->belongsToMany('Projet', [
+            'foreignKey' => 'module_id',
+            'targetForeignKey' => 'projet_id',
+            'joinTable' => 'module_projet'
         ]);
     }
 
@@ -88,19 +81,21 @@ class ModuleTable extends Table
             ->notEmpty('nom');
 
         $validator
+            ->numeric('marge')
+            ->requirePresence('marge', 'create')
+            ->notEmpty('marge');
+
+        $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         $validator
             ->dateTime('date_in')
-            ->requirePresence('date_in', 'create')
-            ->notEmpty('date_in');
+            ->allowEmpty('date_in');
 
         $validator
             ->dateTime('date_out')
-            ->requirePresence('date_out', 'create')
-            ->notEmpty('date_out');
+            ->allowEmpty('date_out');
 
         return $validator;
     }
@@ -114,10 +109,7 @@ class ModuleTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['projet_id'], 'Projet'));
-        $rules->add($rules->existsIn(['cctp_id'], 'Cctp'));
         $rules->add($rules->existsIn(['gamme_id'], 'Gamme'));
-        $rules->add($rules->existsIn(['coupe_principe_id'], 'CoupePrincipe'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

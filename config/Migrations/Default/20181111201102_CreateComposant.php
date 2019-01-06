@@ -20,11 +20,11 @@ class CreateComposant extends AbstractMigration
             ->addColumn('fournisseur_id','integer', ['null' => false])
             ->addForeignKey('fournisseur_id', 'fournisseur','id', ['delete' => 'restrict', 'update' => 'restrict'])
             ->addColumn('nom','text',['null' => false])
-            ->addColumn('prix_achat', 'decimal',['null' => false])
-            ->addColumn('pourcentage_marge','decimal',['null' => false])
+            ->addColumn('prix_achat', 'float',['null' => false])
+            ->addColumn('pourcentage_marge','float',['null' => false])
             ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
             ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
-            ->addColumn('date_in','datetime',['null' => true,'default' => null])
+            ->addColumn('date_in','datetime',['null' => true,'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('date_out','datetime',['null' => true,'default' => null])
             ->create();
     }

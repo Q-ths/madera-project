@@ -1,7 +1,8 @@
 <?php
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
+use App\Model\DatabaseTrait\FindEnable;
+use App\Model\DatabaseTrait\FindOrderByActivate;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -39,8 +40,7 @@ class FournisseurTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Composant', [
             'foreignKey' => 'fournisseur_id'
@@ -101,8 +101,7 @@ class FournisseurTable extends Table
 
         $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         return $validator;
     }

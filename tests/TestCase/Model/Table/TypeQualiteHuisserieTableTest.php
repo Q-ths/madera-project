@@ -25,7 +25,7 @@ class TypeQualiteHuisserieTableTest extends TestCase
      */
     public $fixtures = [
         'app.type_qualite_huisserie',
-        'app.users',
+        'app.user',
         'app.gamme'
     ];
 
@@ -37,8 +37,8 @@ class TypeQualiteHuisserieTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('TypeQualiteHuisserie') ? [] : ['className' => TypeQualiteHuisserieTable::class];
-        $this->TypeQualiteHuisserie = TableRegistry::getTableLocator()->get('TypeQualiteHuisserie', $config);
+        $config = TableRegistry::getTableLocator()->exists('TypeQualiteHuisserieController') ? [] : ['className' => TypeQualiteHuisserieTable::class];
+        $this->TypeQualiteHuisserie = TableRegistry::getTableLocator()->get('TypeQualiteHuisserieController', $config);
     }
 
     /**

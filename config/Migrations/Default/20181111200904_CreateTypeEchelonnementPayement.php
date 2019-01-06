@@ -14,7 +14,7 @@ class CreateTypeEchelonnementPayement extends AbstractMigration
     {
         $this->table('type_echelonnement_payement')
             ->addColumn('libelle','text', ['null' => false])
-            ->addColumn('pourcentage_payement', 'decimal', ['null' => false])
+            ->addColumn('pourcentage_payement', 'float', ['null' => false])
             ->create();
     }
 }

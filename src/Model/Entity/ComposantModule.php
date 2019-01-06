@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $module_id
  * @property int $composant_id
+ * @property int $quantite
  *
  * @property \App\Model\Entity\Module $module
  * @property \App\Model\Entity\Composant $composant
@@ -28,6 +29,7 @@ class ComposantModule extends Entity
     protected $_accessible = [
         'module_id' => true,
         'composant_id' => true,
+        'quantite' => true,
         'module' => true,
         'composant' => true
     ];

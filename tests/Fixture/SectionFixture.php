@@ -28,10 +28,10 @@ class SectionFixture extends TestFixture
         'module_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'longueur' => ['type' => 'decimal', 'length' => 10, 'precision' => 0, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'angle_entrant' => ['type' => 'decimal', 'length' => 10, 'precision' => 0, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
-        'user_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'derniere_date_modification' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'date_in' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
-        'date_out' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'user_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'derniere_date_modification' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'date_in' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
+        'date_out' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'module_id' => ['type' => 'index', 'columns' => ['module_id'], 'length' => []],
         ],
@@ -60,9 +60,9 @@ class SectionFixture extends TestFixture
                 'longueur' => 1.5,
                 'angle_entrant' => 1.5,
                 'user_id' => 1,
-                'derniere_date_modification' => '2018-11-13 10:18:40',
-                'date_in' => '2018-11-13 10:18:40',
-                'date_out' => '2018-11-13 10:18:40'
+                'derniere_date_modification' => '2018-12-06 15:16:44',
+                'date_in' => '2018-12-06 15:16:44',
+                'date_out' => '2018-12-06 15:16:44'
             ],
         ];
         parent::init();

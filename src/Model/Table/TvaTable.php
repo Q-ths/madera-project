@@ -1,6 +1,8 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\DatabaseTrait\FindEnable;
+use App\Model\DatabaseTrait\FindOrderByActivate;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -24,6 +26,9 @@ use Cake\Validation\Validator;
 class TvaTable extends Table
 {
 
+    use FindEnable;
+    use FindOrderByActivate;
+
     /**
      * Initialize method
      *
@@ -39,8 +44,7 @@ class TvaTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Composant', [
             'foreignKey' => 'tva_id'
@@ -60,24 +64,26 @@ class TvaTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->decimal('pourcentage_tva')
+            ->scalar('nom')
+            ->requirePresence('nom', 'create')
+            ->notEmpty('nom');
+
+        $validator
+            ->numeric('pourcentage_tva')
             ->requirePresence('pourcentage_tva', 'create')
             ->notEmpty('pourcentage_tva');
 
         $validator
             ->dateTime('derniere_date_modification')
-            ->requirePresence('derniere_date_modification', 'create')
-            ->notEmpty('derniere_date_modification');
+            ->allowEmpty('derniere_date_modification');
 
         $validator
             ->dateTime('date_in')
-            ->requirePresence('date_in', 'create')
-            ->notEmpty('date_in');
+            ->allowEmpty('date_in');
 
         $validator
             ->dateTime('date_out')
-            ->requirePresence('date_out', 'create')
-            ->notEmpty('date_out');
+            ->allowEmpty('date_out');
 
         return $validator;
     }

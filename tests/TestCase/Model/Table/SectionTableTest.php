@@ -26,7 +26,7 @@ class SectionTableTest extends TestCase
     public $fixtures = [
         'app.section',
         'app.module',
-        'app.users'
+        'app.user'
     ];
 
     /**
