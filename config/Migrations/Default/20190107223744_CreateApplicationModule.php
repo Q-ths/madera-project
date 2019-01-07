@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateUserProfil extends AbstractMigration
+class CreateApplicationModule extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,7 +12,10 @@ class CreateUserProfil extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('user_profil');
+        $table = $this->table('application_module');
+        $table->addColumn('nom','text',['null' => false]);
         $table->create();
+
+        $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 1');
     }
 }

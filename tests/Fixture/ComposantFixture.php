@@ -28,7 +28,7 @@ class ComposantFixture extends TestFixture
         'famille_composant_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'tva_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'fournisseur_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'nom' => ['type' => 'text', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
+        'nom' => ['type' => 'text', 'length' => null, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null],
         'prix_achat' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'pourcentage_marge' => ['type' => 'float', 'length' => null, 'precision' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => ''],
         'user_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
@@ -48,7 +48,7 @@ class ComposantFixture extends TestFixture
         ],
         '_options' => [
             'engine' => 'InnoDB',
-            'collation' => 'latin1_swedish_ci'
+            'collation' => 'utf8_general_ci'
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -70,9 +70,9 @@ class ComposantFixture extends TestFixture
                 'prix_achat' => 1,
                 'pourcentage_marge' => 1,
                 'user_id' => 1,
-                'derniere_date_modification' => '2019-01-05 10:50:00',
-                'date_in' => '2019-01-05 10:50:00',
-                'date_out' => '2019-01-05 10:50:00'
+                'derniere_date_modification' => '2019-01-07 23:16:33',
+                'date_in' => '2019-01-07 23:16:33',
+                'date_out' => '2019-01-07 23:16:33'
             ],
         ];
         parent::init();

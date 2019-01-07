@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $client_id
+ * @property int $utilisateur_id
  * @property string $reference
  * @property \Cake\I18n\FrozenTime $date_creation
  * @property string $nom
@@ -15,6 +16,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $derniere_date_modification
  *
  * @property \App\Model\Entity\Client $client
+ * @property \App\Model\Entity\User $responsable
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Devi[] $devis
  * @property \App\Model\Entity\Module[] $module
@@ -33,12 +35,14 @@ class Projet extends Entity
      */
     protected $_accessible = [
         'client_id' => true,
+        'utilisateur_id' => true,
         'reference' => true,
         'date_creation' => true,
         'nom' => true,
         'user_id' => true,
         'derniere_date_modification' => true,
         'client' => true,
+        'responsable' => true,
         'user' => true,
         'devis' => true,
         'module' => true

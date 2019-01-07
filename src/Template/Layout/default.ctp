@@ -48,11 +48,14 @@ $cakeDescription = 'Madera - ';
 <body>
     <!--Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark default-color">
-        <a class="navbar-brand" href="#">MADERA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-                aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="row toolbar-header justify-content-center">
+            <div class="col align-self-center">
+                <i class="material-icons">menu</i>
+            </div>
+            <div class="col app-title-size">
+                MADERA
+            </div>
+        </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="navbar-nav ml-auto nav-flex-icons">
                 <li class="nav-item dropdown">
@@ -70,102 +73,115 @@ $cakeDescription = 'Madera - ';
     <!--/.Navbar -->
     <div class="row" id="body-row">
 
-        <div id="sidebar-container" class="sidebar-expanded d-none d-md-block"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+        <div id="sidebar-container" class="col-5 col-sm-4 col-md-3 col-lg-3 col-xl-2 sidebar-expanded d-none d-lg-block visibility"><!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
             <!-- Bootstrap List Group -->
             <ul class="list-group">
+                <?php foreach($this->request->session()->read('Auth.User.profil')['droit'] as $key => $item): ?>
+                    <?php if($item->valeur == 0): ?>
 
-                <!-- Separator with title -->
-                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                    <small>GESTIONS DE DEVIS</small>
-                </li>
-                <!-- /END Separator -->
-                <a href="/projet" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Projets</span>
-                    </div>
-                </a>
-                <a href="/module-projet" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Modules</span>
-                    </div>
-                </a>
+                        <?php if($item['application_module']['nom'] == "Devis"): ?>
 
-                <!-- Separator with title -->
-                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                    <small>MODULE CONFIFGURATION</small>
-                </li>
-                <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Gestions des gammes</span>
-                        <span class="submenu-icon ml-auto"></span>
-                    </div>
-                </a>
-                <!-- Submenu content -->
-                <div id='submenu1' class="collapse sidebar-submenu">
-                    <a href="/gamme" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Gammes</span>
-                    </a>
-                    <a href="/module" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Modules</span>
-                    </a>
-                    <a href="/composant" class="list-group-item list-group-item-action bg-dark text-white">
-                        <span class="menu-collapsed">Composants</span>
-                    </a>
-                </div>
-                <a href="/type-finition" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Finition </span>
-                    </div>
-                </a>
-                <a href="/type-isolant" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Isolant </span>
-                    </div>
-                </a>
-                <a href="/famille-composant" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Famille de composants </span>
-                    </div>
-                </a>
-                <a href="/tva" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Tva </span>
-                    </div>
-                </a>
+                            <!-- Separator with title -->
+                            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                                <small>GESTIONS DE DEVIS</small>
+                            </li>
+                            <!-- /END Separator -->
+                            <a href="/projet" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Projets</span>
+                                </div>
+                            </a>
+                            <a href="/module-projet" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Modules</span>
+                                </div>
+                            </a>
+                        <?php endif; ?>
 
-                <!-- Separator with title -->
-                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                    <small>CARNET D'ADRESSES</small>
-                </li>
-                <!-- /END Separator -->
-                <a href="/fournisseur" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Fournisseurs</span>
-                    </div>
-                </a>
-                <a href="/client" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Clients </span>
-                    </div>
-                </a>
+                        <?php if($item['application_module']['nom'] == "Configuration"): ?>
 
+                            <!-- Separator with title -->
+                            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                                <small>MODULE CONFIFGURATION</small>
+                            </li>
+                            <a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Gestions des gammes</span>
+                                    <span class="submenu-icon ml-auto"></span>
+                                </div>
+                            </a>
+                            <!-- Submenu content -->
+                            <div id='submenu1' class="collapse sidebar-submenu">
+                                <a href="/gamme" class="list-group-item list-group-item-action bg-dark text-white">
+                                    <span class="menu-collapsed">Gammes</span>
+                                </a>
+                                <a href="/module" class="list-group-item list-group-item-action bg-dark text-white">
+                                    <span class="menu-collapsed">Modules</span>
+                                </a>
+                                <a href="/composant" class="list-group-item list-group-item-action bg-dark text-white">
+                                    <span class="menu-collapsed">Composants</span>
+                                </a>
+                            </div>
+                            <a href="/type-finition" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Finition </span>
+                                </div>
+                            </a>
+                            <a href="/type-isolant" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Isolant </span>
+                                </div>
+                            </a>
+                            <a href="/famille-composant" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Famille de composants </span>
+                                </div>
+                            </a>
+                            <a href="/tva" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Tva </span>
+                                </div>
+                            </a>
+                        <?php endif; ?>
 
+                        <?php if($item['application_module']['nom'] == "Carnet d'adresses"): ?>
+                            <!-- Separator with title -->
+                            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                                <small>CARNET D'ADRESSES</small>
+                            </li>
+                            <!-- /END Separator -->
+                            <a href="/fournisseur" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Fournisseurs</span>
+                                </div>
+                            </a>
+                            <a href="/client" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Clients </span>
+                                </div>
+                            </a>
+                        <?php endif; ?>
 
-                <!-- Separator with title -->
-                <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                    <small>Autres</small>
-                </li>
-                <!-- /END Separator -->
-                <a href="/users" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Utilisateurs</span>
-                    </div>
-                </a>
-                <a href="/droits" class="bg-dark list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-start align-items-center">
-                        <span class="menu-collapsed">Gestions des droits </span>
-                    </div>
-                </a>
+                        <?php if($item['application_module']['nom'] == "Autres"): ?>
+                            <!-- Separator with title -->
+                            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                                <small>Autres</small>
+                            </li>
+                            <!-- /END Separator -->
+                            <a href="/users" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Utilisateurs</span>
+                                </div>
+                            </a>
+                            <a href="/droits" class="bg-dark list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-start align-items-center">
+                                    <span class="menu-collapsed">Gestions des droits </span>
+                                </div>
+                            </a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
             </ul><!-- List Group END-->
         </div><!-- sidebar-container END -->
 

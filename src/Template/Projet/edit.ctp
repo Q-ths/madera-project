@@ -1,86 +1,109 @@
-<div ng-controller="ProjetController">
+<div ng-controller="TvasController">
 
-    <div class="row">
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?=$this->Url->build('/', true)?>">Madera</a></li>
-                    <li class="breadcrumb-item" aria-current="page">Configuration</li>
-                    <li class="breadcrumb-item" aria-current="page">Projet</li>
-                    <li class="breadcrumb-item" aria-current="page">Création</li>
-                </ol>
-            </nav>
-        </div>
-
+    <div class="alert alert-danger alert-dismissible fade show" id="alert-missing-fields" role="alert">
+        <h4 class="alert-heading">Erreur lors de la validation des données</h4>
+        <p>
+            Des champs sont manquants.
+        </p>
     </div>
 
-    <div class="row">
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <label> Libelle</label>
-                <input type="text" class="form-control" ng-model="projet.nom" placeholder="Libelle">
-            </div>
-        </div>
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <label> Référence</label>
-                <input type="text" class="form-control" ng-model="projet.reference" placeholder="Référence">
-            </div>
-        </div>
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <label >Client</label>
-                <select class="form-control"  ng-model="projet.client_id">
-                    <option ng-repeat="item in clients" value="{{item.id}}"> {{item.nom + ' ' + item.prenom}}</option>
-                </select>
-            </div>
+    <div class="alert alert-info alert-dismissible fade show" id="alert-info-saving" role="alert">
+        <h4 class="alert-heading">Enregistrement des données</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
     </div>
-    <div class="row">
+
+
+    <div class="row title-page">
+        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 title">
+            <h4>Ajout d'une TVA</h4>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-text-right">
+            <a class="btn btn-page-actions" href="/tva" ><i class="material-icons icons-page-actions">arrow_back</i></a>
+            <a class="btn btn-page-actions" ng-click="add()" ><i class="material-icons icons-page-actions">save</i></a>
+        </div>
+    </div>
+
+    <div class="container-page-content">
+        <div class="row">
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <button type="button" class="btn btn-primary btn-block" ng-click="editProjet()">Valider</button>
+                <div class="form-group">
+                    <label> Libelle</label>
+                    <input type="text" class="form-control" ng-model="projet.nom" ng-class="(projet.nom.length > 0) ? 'is-valid' : 'is-invalid' " placeholder="Libelle">
+                </div>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <a href="/projet" class="btn btn-danger btn-block">Annuler</a>
+                <div class="form-group">
+                    <label> Référence</label>
+                    <input type="text" class="form-control" ng-model="projet.reference" ng-class="(projet.reference.length > 0) ? 'is-valid' : 'is-invalid' " placeholder="Référence">
+                </div>
             </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label >Client</label>
+                    <select ng-options="t.id as (t.nom + ' ' + t.prenom) for t in clients" ng-class="(projet.client_id != null) ? 'is-valid' : 'is-invalid' " class="form-control" ng-model="projet.client_id"></select>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label >Utilisateur</label>
+                    <select ng-options="t.id as (t.nom + ' ' + t.prenom) for t in users" class="form-control" ng-class="(projet.utilisateur_id != null) ? 'is-valid' : 'is-invalid' " ng-model="projet.utilisateur_id"></select>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
 <script>
-    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
-    angular.module('projet', ['ngRoute'])
-        .controller('ProjetController', ['$scope','$http','$location', function ($scope,$http,$location) {
+    angular.module('tva', [])
+        .controller('TvasController', ['$scope','$http', function ($scope,$http) {
+
+            $(".alert").hide();
+
             $scope.clients = [];
+            $scope.users = [];
 
             $scope.client = null;
             $scope.projet = null;
-
-            $http.get('/projet/view/' + window.location.search.split('id=')[1]).then(function ($response) {
-                $scope.projet = $response.data;
-                $scope.projet.client_id = $scope.projet.client_id  + "";
-            });
+            $scope.user = null;
 
             $http.get('/client/get').then(function ($response) {
                 $scope.clients = $response.data;
             });
 
-            $scope.editProjet = function () {
-                /* En-tête de la requête ASYNC */
+            $http.get('/users/get').then(function ($response) {
+                $scope.users = $response.data;
+            });
+
+            $http.get('/projet/view/' + window.location.search.split('id=')[1]).then(function ($response) {
+                $scope.projet = $response.data;
+            });
+
+            $scope.add = function () {
+                let size = Object.keys($scope.projet).length;
+                if(size < 4) {
+                    $('#alert-missing-fields').show()
+
+                    setTimeout(function () {
+                        $('#alert-missing-fields').hide();
+                    },2000);
+                    return;
+                }
+                $('#alert-missing-fields').hide();
+                $('#alert-info-saving').show();
+
+
                 let header = new Headers({
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin" : "*",
-                    'X-CSRF-Token': csrfToken
                 });
 
-                fetch('/projet/edit/' + window.location.search.split('id=')[1], {headers:header, method:'post', body:JSON.stringify($scope.projet)})
+                fetch('/projet/edit/' + $scope.projet.id, {headers:header, method:'post', body:JSON.stringify($scope.projet)})
                     .then(function ($response) {
-                        $response.json().then(function ($data) {
-                            window.location.href= "/projet";
-                        })
-                    })
-            };
-
+                        $('#alert-info-saving').hide();
+                        window.location.href = '/projet';
+                    });
+            }
         }]);
-    angular.bootstrap(document,['projet']);
-
+    angular.bootstrap(document,['tva']);
 </script>

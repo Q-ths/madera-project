@@ -53,7 +53,7 @@
                     Please provide a valid city.
                 </div>
             </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label >Mot de passe *</label>
                     <input type="password" class="form-control" ng-class="(user.password != null) ? 'is-valid' : 'is-invalid' " ng-model="user.password" placeholder="Mot de passe *">

@@ -14,7 +14,6 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $date_in
  * @property \Cake\I18n\FrozenTime $date_out
  * @property int $projet_id
- * @property int $module_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Projet $projet
@@ -40,7 +39,6 @@ class ModuleProjet extends Entity
         'date_in' => true,
         'date_out' => true,
         'projet_id' => true,
-        'module_id' => true,
         'user' => true,
         'projet' => true,
         'module_composant_projet' => true

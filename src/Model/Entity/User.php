@@ -11,8 +11,14 @@ use Cake\ORM\Entity;
  * @property string $password
  * @property string $nom
  * @property string $prenom
- * @property string $poste
+ * @property int $profil_id
+ * @property int $user_id
+ * @property \Cake\I18n\FrozenTime $derniere_date_modification
+ * @property \Cake\I18n\FrozenTime $date_in
+ * @property \Cake\I18n\FrozenTime $date_out
  *
+ * @property \App\Model\Entity\Profil $profil
+ * @property \App\Model\Entity\User[] $users
  * @property \App\Model\Entity\Client[] $client
  * @property \App\Model\Entity\Composant[] $composant
  * @property \App\Model\Entity\Devi[] $devis
@@ -44,7 +50,13 @@ class User extends Entity
         'password' => true,
         'nom' => true,
         'prenom' => true,
-        'poste' => true,
+        'profil_id' => true,
+        'user_id' => true,
+        'derniere_date_modification' => true,
+        'date_in' => true,
+        'date_out' => true,
+        'profil' => true,
+        'users' => true,
         'client' => true,
         'composant' => true,
         'devis' => true,

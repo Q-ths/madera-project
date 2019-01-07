@@ -13,6 +13,10 @@ class CreateDroit extends AbstractMigration
     public function change()
     {
         $table = $this->table('droit');
+        $table->addColumn('nom','text',['null' => false]);
+        $table->addColumn('valeur','integer',['null' => false]);
+        $table->addColumn('application_module_id','integer',['null' => false]);
+        $table->addForeignKey('application_module_id','application_module','id',['update' => 'restrict','delete' => 'restrict']);
         $table->create();
     }
 }

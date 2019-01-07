@@ -33,7 +33,14 @@ class ProjetController extends AppController
 
     public function get()
     {
-        $projets = $this->Projet->find('all')->contain(['Client'])->toArray();
+        $projets = $this->Projet->find('all')->contain(['Client','Responsable'])->toArray();
+
+        return $this->renderToJson(json_encode($projets));
+    }
+
+    public function getEnable()
+    {
+        $projets = $this->Projet->find('all')->contain(['Client','Responsable'])->toArray();
 
         return $this->renderToJson(json_encode($projets));
     }
@@ -67,11 +74,9 @@ class ProjetController extends AppController
     }
 
     /**
-     * Edit method
+     * @param null $id
+     * @return ProjetController|\Cake\Http\Response
      *
-     * @param string|null $id FamilleComposant id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {

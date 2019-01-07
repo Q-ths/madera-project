@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property float $prix_achat
  * @property float $pourcentage_marge
  * @property float $tva
+ * @property int $quantite
  * @property int $user_id
  * @property \Cake\I18n\FrozenTime $derniere_date_modification
  * @property \Cake\I18n\FrozenTime $date_in
@@ -37,6 +38,7 @@ class ModuleComposantProjet extends Entity
         'prix_achat' => true,
         'pourcentage_marge' => true,
         'tva' => true,
+        'quantite' => true,
         'user_id' => true,
         'derniere_date_modification' => true,
         'date_in' => true,

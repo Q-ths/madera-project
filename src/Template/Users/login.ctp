@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div id="container-btn-submit">
-                <button class="btn btn-primary full-width" ng-click="validate(user)">Connexion</button>
+                <button class="btn btn-primary full-width" ng-click="validate()">Connexion</button>
             </div>
             <div class="container-forgot-password">
                 <a href="#" class="forgot-password"> Mot de passe oublié ? </a>
@@ -41,16 +41,20 @@
     var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
     var app = angular.module('connexion', [])
     .controller('FormConnexion', ['$scope', function ($scope) {
-       $scope.validate = function ($user) {
-           header = new Headers({
+
+        $scope.user;
+
+        $scope.validate = function () {
+           let header = new Headers({
                "Content-Type": "application/json",
                "Access-Control-Allow-Origin" : "*",
                'X-CSRF-Token': csrfToken
            });
 
 
-            fetch('/users/login',{headers:header, method:'post', body:JSON.stringify($user)})
+            fetch('/users/login',{headers:header, method:'post', body:JSON.stringify($scope.user)})
                 .then(function (response) {
+                    console.log(response);
                 if(response.status == 200) {
                     $('#alert-success-connexion').removeClass('d-none');
                     $('#alert-error-connexion').addClass('d-none');

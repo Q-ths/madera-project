@@ -5,16 +5,12 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use App\Model\DatabaseTrait\FindEnable;
-use App\Model\DatabaseTrait\FindOrderByActivate;
-
 
 /**
  * ModuleProjet Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ProjetTable|\Cake\ORM\Association\BelongsTo $Projet
- * @property |\Cake\ORM\Association\BelongsTo $Module
  * @property \App\Model\Table\ModuleComposantProjetTable|\Cake\ORM\Association\HasMany $ModuleComposantProjet
  *
  * @method \App\Model\Entity\ModuleProjet get($primaryKey, $options = [])
@@ -28,9 +24,6 @@ use App\Model\DatabaseTrait\FindOrderByActivate;
  */
 class ModuleProjetTable extends Table
 {
-
-    use FindEnable;
-    use FindOrderByActivate;
 
     /**
      * Initialize method
@@ -51,10 +44,6 @@ class ModuleProjetTable extends Table
         ]);
         $this->belongsTo('Projet', [
             'foreignKey' => 'projet_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Module', [
-            'foreignKey' => 'module_id',
             'joinType' => 'INNER'
         ]);
         $this->hasMany('ModuleComposantProjet', [
@@ -110,7 +99,6 @@ class ModuleProjetTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['projet_id'], 'Projet'));
-        $rules->add($rules->existsIn(['module_id'], 'Module'));
 
         return $rules;
     }

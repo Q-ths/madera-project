@@ -18,7 +18,6 @@ class ClientSeed extends AbstractSeed
      */
     public function run()
     {
-        $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 0');
 
         $data = [
             [

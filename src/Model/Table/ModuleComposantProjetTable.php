@@ -5,9 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use App\Model\DatabaseTrait\FindEnable;
-use App\Model\DatabaseTrait\FindOrderByActivate;
-
 
 /**
  * ModuleComposantProjet Model
@@ -26,9 +23,6 @@ use App\Model\DatabaseTrait\FindOrderByActivate;
  */
 class ModuleComposantProjetTable extends Table
 {
-
-    use FindEnable;
-    use FindOrderByActivate;
 
     /**
      * Initialize method
@@ -84,6 +78,10 @@ class ModuleComposantProjetTable extends Table
             ->numeric('tva')
             ->requirePresence('tva', 'create')
             ->notEmpty('tva');
+
+        $validator
+            ->integer('quantite')
+            ->allowEmpty('quantite');
 
         $validator
             ->dateTime('derniere_date_modification')

@@ -13,6 +13,7 @@ class CreateProfil extends AbstractMigration
     public function change()
     {
         $table = $this->table('profil');
+        $table->addColumn('nom','text',['null' => false]);
         $table->create();
     }
 }

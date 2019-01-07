@@ -1,88 +1,102 @@
-<div ng-controller="ModuleController">
+<div ng-controller="ComposantController">
 
-    <div class="row">
-        <div class="col-md-5">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?=$this->Url->build('/', true)?>">Madera</a></li>
-                    <li class="breadcrumb-item" aria-current="page">Configuration</li>
-                    <li class="breadcrumb-item" aria-current="page">Module</li>
-                    <li class="breadcrumb-item" aria-current="page">Création</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="alert alert-danger alert-dismissible fade show" id="alert-missing-fields" role="alert">
+        <h4 class="alert-heading">Erreur lors de la validation des données</h4>
+        <p>
+            Des champs sont manquants.
+        </p>
+    </div>
 
-        <div class="col-md-5 offset-md-2">
-            <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="createModule()" data-toggle="modal">Valider</button>
+    <div class="alert alert-info alert-dismissible fade show" id="alert-info-saving" role="alert">
+        <h4 class="alert-heading">Enregistrement des données</h4>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <label >Projet </label>
-                <select class="form-control" ng-model="module.projet_id">
-                    <option value="{{item.id}}" ng-repeat="item in projets">{{ item.nom }}</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <label >Module éxistant(s)</label>
-                <select class="form-control" ng-model="module.id" ng-change="onChangeModuleExisting()">
-                    <option value="{{item.id}}" ng-repeat="item in modules">{{ item.nom }}</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <label >Libelle *</label>
-                <input type="text" class="form-control" ng-model="module.nom" placeholder="Libelle *">
-            </div>
-        </div>
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-                <label >Marge (%) *</label>
-                <input type="text" class="form-control" ng-model="module.marge" placeholder="Marge (%) *">
-            </div>
-        </div>
 
-    </div>
-    <div class="row module-add-composant">
-        <div class="col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1 offset-xl-11 text-xl-right">
-            <button type="button" class="btn" data-toggle="modal" data-target="#modal-composant-add"><i class="fa fa-plus"></i></button>
+    <div class="row title-page">
+        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 title">
+            <h4>Ajout d'un module de projet</h4>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-text-right">
+            <a class="btn btn-page-actions" href="/composant" ><i class="material-icons icons-page-actions">arrow_back</i></a>
+            <a class="btn btn-page-actions" ng-click="add()" ><i class="material-icons icons-page-actions">save</i></a>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <table class="table" data-pagination="true" data-row-style="striped">
-                <thead class="thead-light">
-                <tr>
-                    <th data-sortable="true">#</th>
-                    <th data-sortable="true">Libelle</th>
-                    <th data-sortable="true">Quantite</th>
-                    <th data-sortable="true">Prix d'achat</th>
-                    <th data-sortable="true">Marge</th>
-                    <th data-sortable="true">Tva</th>
-                    <th data-sortable="true">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in module_composants track by (item.quantite + $index)">
-                    <td>{{ $index +1 }}</td>
-                    <td>{{ item.nom }}</td>
-                    <td>{{ item.quantite }}</td>
-                    <td>{{ item.prix_achat }}</td>
-                    <td>{{ item.pourcentage_marge }}</td>
-                    <td>{{ item.tva.pourcentage_tva }}</td>
-                    <td class="align-center">
-                        <a class="btn" ng-click="editComposant(item.id)"><i class="fa fa-pencil-alt"></i></a>
-                        <a class="btn" ng-click="deleteComposant(item.id)"><i class="fa fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="container-page-content">
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label >Projet </label>
+                    <select class="form-control" ng-model="module.projet_id">
+                        <option value="{{item.id}}" ng-repeat="item in projets">{{ item.nom }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label >Module éxistant(s)</label>
+                    <select class="form-control" ng-model="module.id" ng-change="onChangeModuleExisting()">
+                        <option value="{{item.id}}" ng-repeat="item in modules">{{ item.nom }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label >Libelle *</label>
+                    <input type="text" class="form-control" ng-model="module.nom" placeholder="Libelle *">
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label >Marge (%) *</label>
+                    <input type="text" class="form-control" ng-model="module.marge" placeholder="Marge (%) *">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row title-page">
+            <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 title">
+                <h5>Listes des composant</h5>
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-text-right">
+                <a class="btn btn-page-actions" data-toggle="modal" data-target="#modal-composant-add" ><i class="material-icons icons-page-actions">add</i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <table class="table" data-pagination="true" data-row-style="striped">
+                    <thead class="thead-light">
+                    <tr>
+                        <th col="1" data-sortable="true">#</th>
+                        <th col="2" data-sortable="true">Libelle</th>
+                        <th col="2" data-sortable="true">Quantite</th>
+                        <th col="2" data-sortable="true">Prix d'achat</th>
+                        <th col="2" data-sortable="true">Marge</th>
+                        <th col="2" data-sortable="true">Tva</th>
+                        <th col="1" data-sortable="true">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in module_composants track by (item.quantite + $index)">
+                        <td col="1">{{ $index +1 }}</td>
+                        <td col="2">{{ item.nom }}</td>
+                        <td col="2">{{ item.quantite }}</td>
+                        <td col="2">{{ item.prix_achat }}</td>
+                        <td col="2">{{ item.pourcentage_marge }}</td>
+                        <td col="2">{{ item.tva.pourcentage_tva }}</td>
+                        <td col="1" class="align-center">
+                            <a class="btn" ng-click="editComposant(item.id)"><i class="material-icons">edit</i></a>
+                            <a class="btn" ng-click="deleteComposant(item.id)"><i class="material-icons">clear</i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -96,6 +110,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show" id="alert-missing-fields-modal" role="alert">
+                        <h4 class="alert-heading">Erreur lors de la validation des données</h4>
+                        <p>
+                            Des champs sont manquants.
+                        </p>
+                    </div>
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <div class="form-group">
@@ -117,15 +137,15 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-user">Annuler</button>
                 <button type="button" class="btn btn-primary" ng-click="addComposant()">Ajouter</button>
+            </div>
         </div>
-    </div>
-</div>
-</div>
 
+</div>
 <script>
-    var csrfToken = <?= json_encode($this->request->getParam('_csrfToken')) ?>;
-    angular.module('module_add', [])
-        .controller('ModuleController', ['$scope','$http', function ($scope,$http) {
+    angular.module('composant', [])
+        .controller('ComposantController', ['$scope','$http', function ($scope,$http) {
+
+            $(".alert").hide();
 
             $scope.modules = [];
             $scope.projets = [];
@@ -135,24 +155,22 @@
             $scope.composant = null;
             $scope.module = null;
 
-            $http.get('/module/get').then(function ($response) {
+            $http.get('/module/getEnable').then(function ($response) {
                 $scope.modules = $response.data;
             });
-            $http.get('/composant/get').then(function ($response) {
+            $http.get('/composant/getEnable').then(function ($response) {
                 $scope.composants = $response.data;
             });
             $http.get('/projet/get').then(function ($response) {
                 $scope.projets = $response.data;
             });
 
-            $scope.addComposant = function () {
-                $scope.module_composants.push(Object.assign({},$scope.composant));
-                $scope.composant = null;
-            };
-
+            /**/
             $scope.onChangeModuleExisting = function() {
                 $http.get('/module/view/' + $scope.module.id).then(function ($response) {
-                    $scope.module = $response.data;
+                    $id = $scope.module.projet_id;
+                    $scope.module = $response.data
+                    $scope.module.projet_id = $id;
                     $scope.module_composants = $response.data.composant;
 
                     $scope.module_composants.forEach(function ($item) {
@@ -162,13 +180,43 @@
                     $scope.module.id = $scope.module.id +""
                 });
             }
+            /**/
 
-            $scope.createModule = function () {
+            $scope.addComposant = function () {
+                if($scope.composant == null || $scope.composant.quantite == null) {
+                    $('#alert-missing-fields-modal').show()
+
+                    setTimeout(function () {
+                        $('#alert-missing-fields-modal').hide();
+                    },2000);
+                    return;
+                }
+                $('#alert-missing-fields').hide();
+
+                $scope.module_composants.push(Object.assign({},$scope.composant));
+                $scope.composant = null;
+                $scope.quantite = null;
+
+                $('#modal-composant-add').modal('hide');
+            };
+
+            $scope.add = function () {
+                let size = Object.keys($scope.module).length + $scope.module_composants.length;
+                if(size < 4) {
+                    $('#alert-missing-fields').show()
+
+                    setTimeout(function () {
+                        $('#alert-missing-fields').hide();
+                    },2000);
+                    return;
+                }
+                $('#alert-missing-fields').hide();
+                $('#alert-info-saving').show();
+
+
                 /* En-tête de la requête ASYNC */
                 let header = new Headers({
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin" : "*",
-                    'X-CSRF-Token': csrfToken
                 });
 
                 let body = {
@@ -176,18 +224,13 @@
                     module_composants : $scope.module_composants
                 }
 
-                console.log(body);
-
                 fetch('/module-projet/create', {headers:header, method:'post', body:JSON.stringify(body)})
                     .then(function ($response) {
                         $response.json().then(function ($data) {
-                            window.location.href= "/module";
+                            window.location.href= "/module-projet";
                         })
                     })
-            };
-
-
+            }
         }]);
-    angular.bootstrap(document,['module_add']);
-
+    angular.bootstrap(document,['composant']);
 </script>

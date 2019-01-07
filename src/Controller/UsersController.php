@@ -117,10 +117,12 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                $this->response->withStatus(201);
+                $this->Auth->setUser($this->Users->get($this->Auth->user('id'),['contain' => ['Profil' => ['Droit' => ['ApplicationModule']]]]));
+
+                return $this->renderToJson(json_encode($user));
             }
             else {
-                $this->response->withStatus(404);
+                return $this->renderToJson(json_encode([]),500);
             }
         }
     }

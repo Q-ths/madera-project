@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  * @property int $code_postal
  * @property string $ville
  * @property string $email
- * @property int $telephone
+ * @property string $telephone
  * @property int $user_id
  * @property \Cake\I18n\FrozenTime $derniere_date_modification
  *

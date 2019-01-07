@@ -5,9 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use App\Model\DatabaseTrait\FindEnable;
-use App\Model\DatabaseTrait\FindOrderByActivate;
-
 
 /**
  * Module Model
@@ -28,8 +25,6 @@ use App\Model\DatabaseTrait\FindOrderByActivate;
  */
 class ModuleTable extends Table
 {
-    use FindEnable;
-    use FindOrderByActivate;
 
     /**
      * Initialize method

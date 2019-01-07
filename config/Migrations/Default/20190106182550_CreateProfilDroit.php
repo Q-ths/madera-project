@@ -13,6 +13,10 @@ class CreateProfilDroit extends AbstractMigration
     public function change()
     {
         $table = $this->table('profil_droit');
+        $table->addColumn('profil_id','integer',['null' => false]);
+        $table->addForeignKey('profil_id','profil','id',['update' => 'restrict','delete' => 'restrict']);
+        $table->addColumn('droit_id','integer',['null' => false]);
+        $table->addForeignKey('droit_id','droit','id',['update' => 'restrict','delete' => 'restrict']);
         $table->create();
     }
 }

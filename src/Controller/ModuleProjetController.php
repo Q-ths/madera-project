@@ -49,7 +49,16 @@ class ModuleProjetController extends AppController
 
     public function view($id)
     {
-        $module_projet = $this->ModuleProjet->get($id,['contain' => ['ModuleComposantProjet','Projet','Module']]);
+        $module_projet = $this->ModuleProjet->get($id,
+            ['contain' =>
+                [
+                    'ModuleComposantProjet' => function($q) {
+                        return $q->order(['date_out']);
+                    },
+                    'Projet'
+                ]
+            ]
+        );
 
         if($module_projet)
             return $this->renderToJson(json_encode($module_projet));
@@ -90,7 +99,7 @@ class ModuleProjetController extends AppController
 
                 try {
                     $this->ModuleComposantProjet->saveMany($composantsModule);
-                    return $this->response->withStatus(200);
+                    return $this->response->withStatus(200)->withType('application/json')->withStringBody(json_encode([]));
 
                 } catch (\Exception $e) {
                 }
@@ -127,19 +136,36 @@ class ModuleProjetController extends AppController
     }
 
     /**
-     * Delete method
-     *
-     * @param string|null $id FamilleComposant id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param null $id
+     * @return ModuleController|\Cake\Http\Response
+     * @throws \Exception
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $module_projet = $this->ModuleProjet->get($id);
-        if ($this->ModuleProjet->delete($module_projet)) {
-            $module_projets = $this->ModuleProjet->find('all')->toArray();
-            return $this->renderToJson(json_encode($module_projets));
+        $module = $this->ModuleProjet->get($id);
+        $module->date_out = (new \DateTime())->format('Y-m-d H:m:s');
+        if ($this->ModuleProjet->save($module)) {
+            $modules = $this->ModuleProjet->find('OrderByActivate', ['table' => 'ModuleProjet'])->toArray();
+            return $this->renderToJson(json_encode($modules));
+        } else {
+            return $this->response->withStatus(400);
+        }
+    }
+
+    /**
+     * @param null $id
+     * @return ModuleController|\Cake\Http\Response
+     * @throws \Exception
+     */
+    public function enable($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $module = $this->ModuleProjet->get($id);
+        $module->date_out = null;
+        if ($this->ModuleProjet->save($module)) {
+            $modules = $this->ModuleProjet->find('OrderByActivate', ['table' => 'ModuleProjet'])->toArray();
+            return $this->renderToJson(json_encode($modules));
         } else {
             return $this->response->withStatus(400);
         }

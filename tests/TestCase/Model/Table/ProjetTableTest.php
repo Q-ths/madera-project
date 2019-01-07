@@ -26,6 +26,7 @@ class ProjetTableTest extends TestCase
     public $fixtures = [
         'app.projet',
         'app.client',
+        'app.responsable',
         'app.users',
         'app.devis',
         'app.module'

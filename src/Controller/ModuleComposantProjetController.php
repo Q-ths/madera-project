@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Model\Entity\ModuleComposantProjet;
 use App\Model\Table\ModuleComposantProjetTable;
 use App\Model\Table\DevisModuleTable;
 use App\Model\Table\ModuleProjetTable;
@@ -40,19 +41,59 @@ class ModuleComposantProjetController extends AppController
     }
 
     /**
-     * Delete method
-     *
-     * @param string|null $id FamilleComposant id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param null $id
+     * @return \Cake\Http\Response
+     * @throws \Exception
+     */
+    public function edit($id = null)
+    {
+
+        /** @var ModuleComposantProjet $module */
+        $this->enableAutoRender();
+        if ($this->request->is('post')) {
+            $module = $this->ModuleComposantProjet->get($id);
+
+            $module = $this->ModuleComposantProjet->patchEntity($module, $this->request->getData());
+            $module->date_in = FrozenTime::parseDate($module->date_in);
+
+            if($this->ModuleComposantProjet->saveOrFail($module)) {
+                return $this->response->withStatus(200)->withType('application/json')->withStringBody(json_encode([]));
+            }
+            return $this->response->withStatus(400);
+        }
+    }
+
+    /**
+     * @param null $id
+     * @return ModuleController|\Cake\Http\Response
+     * @throws \Exception
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $module_projet = $this->ModuleComposantProjet->get($id);
-        if ($this->ModuleComposantProjet->delete($module_projet)) {
-            $module_projets = $this->ModuleComposantProjet->find('all')->toArray();
-            return $this->renderToJson(json_encode($module_projets));
+        $module = $this->ModuleComposantProjet->get($id);
+        $module->date_out = (new \DateTime())->format('Y-m-d H:m:s');
+        if ($this->ModuleComposantProjet->save($module)) {
+            $modules = $this->ModuleComposantProjet->find('OrderByActivate', ['table' => 'ModuleComposantProjet'])->where(['module_projet_id' => $module->module_projet_id])->toArray();
+            return $this->renderToJson(json_encode($modules));
+        } else {
+            return $this->response->withStatus(400);
+        }
+    }
+
+    /**
+     * @param null $id
+     * @return ModuleController|\Cake\Http\Response
+     * @throws \Exception
+     */
+    public function enable($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $module = $this->ModuleComposantProjet->get($id);
+        $module->date_out = null;
+        if ($this->ModuleComposantProjet->save($module)) {
+            $modules = $this->ModuleComposantProjet->find('OrderByActivate', ['table' => 'ModuleComposantProjet'])->where(['module_projet_id' => $module->module_projet_id])->toArray();
+            return $this->renderToJson(json_encode($modules));
         } else {
             return $this->response->withStatus(400);
         }

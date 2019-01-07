@@ -82,7 +82,8 @@
                         <td col="2">{{ item.tva.pourcentage_tva }}</td>
                         <td col="1" class="align-center">
                             <a class="btn" ng-click="editComposant($index)" ><i class="material-icons">edit</i></a>
-                            <a class="btn" ng-click="deleteComposant(item._joinData.id,$index)"><i class="material-icons">clear</i></a>
+                            <a ng-if="item.date_out == null" href="" ng-click="deleteComposant(item.id)"><i class="material-icons">clear</i></a>
+                            <a ng-if="item.date_out != null" href="" ng-click="enableComposant(item.id)"><i class="material-icons">check</i></a>
                         </td>
                     </tr>
                     </tbody>

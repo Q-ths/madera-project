@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property \App\Model\Table\ProfilTable|\Cake\ORM\Association\BelongsTo $Profil
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\ClientTable|\Cake\ORM\Association\HasMany $Client
  * @property \App\Model\Table\ComposantTable|\Cake\ORM\Association\HasMany $Composant
  * @property \App\Model\Table\DevisTable|\Cake\ORM\Association\HasMany $Devis
@@ -22,6 +24,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\TvaTable|\Cake\ORM\Association\HasMany $Tva
  * @property \App\Model\Table\TypeFinitionTable|\Cake\ORM\Association\HasMany $TypeFinition
  * @property \App\Model\Table\TypeIsolantTable|\Cake\ORM\Association\HasMany $TypeIsolant
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\HasMany $Users
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -49,6 +52,13 @@ class UsersTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
+        $this->belongsTo('Profil', [
+            'foreignKey' => 'profil_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('Client', [
             'foreignKey' => 'user_id'
         ]);
@@ -88,6 +98,9 @@ class UsersTable extends Table
         $this->hasMany('TypeIsolant', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Users', [
+            'foreignKey' => 'user_id'
+        ]);
     }
 
     /**
@@ -123,9 +136,16 @@ class UsersTable extends Table
             ->notEmpty('prenom');
 
         $validator
-            ->scalar('poste')
-            ->maxLength('poste', 255)
-            ->allowEmpty('poste');
+            ->dateTime('derniere_date_modification')
+            ->allowEmpty('derniere_date_modification');
+
+        $validator
+            ->dateTime('date_in')
+            ->allowEmpty('date_in');
+
+        $validator
+            ->dateTime('date_out')
+            ->allowEmpty('date_out');
 
         return $validator;
     }
@@ -140,6 +160,8 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['profil_id'], 'Profil'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

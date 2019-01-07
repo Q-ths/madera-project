@@ -17,12 +17,12 @@ class CreateUsers extends AbstractMigration
             ->addColumn('password','text', ['null' => false])
             ->addColumn('nom', 'text', ['null' => false])
             ->addColumn('prenom', 'text', ['null' => false])
+            ->addColumn('profil_id','integer',['null' => false])
+            ->addForeignKey('profil_id','profil','id',['update' => 'restrict','delete' => 'restrict'])
             ->addColumn('user_id', 'integer', ['null' => true,'default' => null])
             ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
             ->addColumn('date_in','datetime',['null' => true,'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('date_out','datetime',['null' => true,'default' => null])
             ->create();
-
-        $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 1');
     }
 }

@@ -1,8 +1,6 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\DatabaseTrait\FindOrderByActivate;
-use App\Model\DatabaseTrait\FindEnable;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -25,9 +23,6 @@ use Cake\Validation\Validator;
  */
 class TypeFinitionTable extends Table
 {
-
-    use FindEnable;
-    use FindOrderByActivate;
 
     /**
      * Initialize method

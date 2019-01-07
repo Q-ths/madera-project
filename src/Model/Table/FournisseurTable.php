@@ -1,8 +1,7 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\DatabaseTrait\FindEnable;
-use App\Model\DatabaseTrait\FindOrderByActivate;
+use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -95,7 +94,7 @@ class FournisseurTable extends Table
             ->notEmpty('email');
 
         $validator
-            ->integer('telephone')
+            ->scalar('telephone')
             ->requirePresence('telephone', 'create')
             ->notEmpty('telephone');
 

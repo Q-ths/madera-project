@@ -21,12 +21,33 @@ class UserSeed extends AbstractSeed
     {
         $data = [
             [
-                'id' => null,
-                'email' => 'admin@admin.local',
+                'profil_id' => '1',
+                'email' => 'admin@madera.com',
                 'password' => (new DefaultPasswordHasher)->hash("admin"),
                 'nom' => 'admin',
                 'prenom' => 'admin',
-            ]
+            ],
+            [
+                'profil_id' => '2',
+                'email' => 'chef@madera.com',
+                'password' => (new DefaultPasswordHasher)->hash("chef"),
+                'nom' => 'Chef d\'équipe ',
+                'prenom' => 'Chef d\'équipe ',
+            ],
+            [
+                'profil_id' => '3',
+                'email' => 'etude@madera.com',
+                'password' => (new DefaultPasswordHasher)->hash("etude"),
+                'nom' => 'Bureau d\'étude',
+                'prenom' => 'Bureau d\'étude ',
+            ],
+            [
+                'profil_id' => '4',
+                'email' => 'commercial@madera.com',
+                'password' => (new DefaultPasswordHasher)->hash("commercial"),
+                'nom' => 'Commercial',
+                'prenom' => 'Machin',
+            ],
         ];
 
         $table = $this->table('users');

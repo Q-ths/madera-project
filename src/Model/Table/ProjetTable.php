@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\ClientTable|\Cake\ORM\Association\BelongsTo $Client
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\DevisTable|\Cake\ORM\Association\HasMany $Devis
  * @property \App\Model\Table\ModuleTable|\Cake\ORM\Association\BelongsToMany $Module
  *
@@ -42,6 +43,10 @@ class ProjetTable extends Table
 
         $this->belongsTo('Client', [
             'foreignKey' => 'client_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'utilisateur_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
@@ -102,6 +107,7 @@ class ProjetTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['client_id'], 'Client'));
+        $rules->add($rules->existsIn(['utilisateur_id'], 'Users'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

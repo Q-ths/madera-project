@@ -13,6 +13,7 @@ class CreateModuleComposantProjet extends AbstractMigration
     public function change()
     {
         $this->execute('SET GLOBAL FOREIGN_KEY_CHECKS = 0');
+        $this->execute('ALTER DATABASE madera CHARACTER SET utf8 COLLATE utf8_general_ci');
 
         $this
             ->table('module_composant_projet')
