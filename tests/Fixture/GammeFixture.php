@@ -62,9 +62,9 @@ class GammeFixture extends TestFixture
                 'type_finition_id' => 1,
                 'type_isolant_id' => 1,
                 'user_id' => 1,
-                'derniere_date_modification' => '2019-01-07 23:16:33',
-                'date_in' => '2019-01-07 23:16:33',
-                'date_out' => '2019-01-07 23:16:33'
+                'derniere_date_modification' => '2019-01-08 20:09:05',
+                'date_in' => '2019-01-08 20:09:05',
+                'date_out' => '2019-01-08 20:09:05'
             ],
         ];
         parent::init();

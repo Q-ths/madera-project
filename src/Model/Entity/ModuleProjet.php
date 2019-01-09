@@ -13,10 +13,10 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $derniere_date_modification
  * @property \Cake\I18n\FrozenTime $date_in
  * @property \Cake\I18n\FrozenTime $date_out
- * @property int $projet_id
+ * @property int $devis_id
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Projet $projet
+ * @property \App\Model\Entity\Devi $devi
  * @property \App\Model\Entity\ModuleComposantProjet[] $module_composant_projet
  */
 class ModuleProjet extends Entity
@@ -38,9 +38,9 @@ class ModuleProjet extends Entity
         'derniere_date_modification' => true,
         'date_in' => true,
         'date_out' => true,
-        'projet_id' => true,
+        'devis_id' => true,
         'user' => true,
-        'projet' => true,
+        'devi' => true,
         'module_composant_projet' => true
     ];
 }

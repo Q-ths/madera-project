@@ -14,22 +14,20 @@
             <table class="table table-striped">
                 <thead >
                 <tr class="d-flex">
-                    <th class="col-1" data-sortable="true">#</th>
+                    <th class="col-2" data-sortable="true">#</th>
                     <th class="col-2" data-sortable="true">Nom</th>
                     <th class="col-2" data-sortable="true">Prénom</th>
-                    <th class="col-2" data-sortable="true">E-mail</th>
-                    <th class="col-2" data-sortable="true">Date de création</th>
+                    <th class="col-3" data-sortable="true">E-mail</th>
                     <th class="col-1" data-sortable="true">Désactivé</th>
                     <th class="col-2" data-sortable="true">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="d-flex" ng-repeat="item in users" >
-                    <td class="col-1">{{ $index +1 }}</td>
+                    <td class="col-2">{{ $index +1 }}</td>
                     <td class="col-2">{{ item.nom }}</td>
                     <td class="col-2">{{ item.prenom }}</td>
-                    <td class="col-2">{{ item.email }}</td>
-                    <td class="col-2" ng-bind="item.date_in | date:'MM/dd/yyyy' " >{{ item.date_in }}</td>
+                    <td class="col-3">{{ item.email }}</td>
 
                     <td class="col-1" ng-if="item.date_out == null">
                         <i class="material-icons">close</i>
@@ -40,8 +38,8 @@
 
                     <td class="col-2">
                         <a href="/users/edit?id={{item.id}}" ><i class="material-icons">edit</i></a>
-                        <a ng-if="item.date_out == null" href="" ng-click="confirmDelete(item.id)"><i class="material-icons">clear</i></a>
-                        <a ng-if="item.date_out != null" href="" ng-click="confirmEnable(item.id)"><i class="material-icons">check</i></a>
+                        <a ng-if="item.date_out == null" href="" ng-click="deleteUsers(item.id)"><i class="material-icons">clear</i></a>
+                        <a ng-if="item.date_out != null" href="" ng-click="enableUsers(item.id)"><i class="material-icons">check</i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -69,6 +67,54 @@
             $http.get('/users/get').then(function ($response) {
                 $scope.users = $response.data;
             });
+
+            $scope.deleteUsers = function ($id) {
+                $('#modal-module-delete').modal('hide');
+                $('#modal-progress').modal();
+
+                /* En-tête de la requête ASYNC */
+                let header = new Headers({
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin" : "*",
+                    'X-CSRF-Token': csrfToken
+                });
+
+                /* Exécution de la requête */
+                fetch('/users/delete/' + $id,{headers:header, method:'post'})
+                    .then(function ($response) {
+                        $('#modal-progress').modal('hide');
+                        if($response.status == 200) {
+                            $response.json().then(function (data) {
+                                $scope.users  = data;
+                                $scope.$apply();
+                            });
+                        }
+                    });
+            };
+
+            $scope.enableUsers = function ($id) {
+                $('#modal-module-enable').modal('hide');
+                $('#modal-progress').modal();
+
+                /* En-tête de la requête ASYNC */
+                let header = new Headers({
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin" : "*",
+                    'X-CSRF-Token': csrfToken
+                });
+
+                /* Exécution de la requête */
+                fetch('/users/enable/' + $id,{headers:header, method:'post'})
+                    .then(function ($response) {
+                        $('#modal-progress').modal('hide');
+                        if($response.status == 200) {
+                            $response.json().then(function (data) {
+                                $scope.users = data;
+                                $scope.$apply();
+                            });
+                        }
+                    });
+            };
 
         }]);
     angular.bootstrap(document,['utilisateurs']);

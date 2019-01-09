@@ -17,7 +17,6 @@ class CreateProjet extends AbstractMigration
             ->addForeignKey('client_id','client','id',['update' => 'restrict', 'delete' => 'restrict'])
             ->addColumn('utilisateur_id','integer',['null' => false])
              ->addForeignKey('utilisateur_id','users','id',['update' => 'restrict', 'delete' => 'restrict'])
-            ->addColumn('reference','string', ['null' => false, 'length'=> 25])
             ->addColumn('date_creation','datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('nom','text', ['null' => false])
             ->addColumn('user_id', 'integer', ['null' => true,'default' => null])

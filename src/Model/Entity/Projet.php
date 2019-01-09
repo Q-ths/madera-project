@@ -9,7 +9,6 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $client_id
  * @property int $utilisateur_id
- * @property string $reference
  * @property \Cake\I18n\FrozenTime $date_creation
  * @property string $nom
  * @property int $user_id
@@ -36,7 +35,6 @@ class Projet extends Entity
     protected $_accessible = [
         'client_id' => true,
         'utilisateur_id' => true,
-        'reference' => true,
         'date_creation' => true,
         'nom' => true,
         'user_id' => true,

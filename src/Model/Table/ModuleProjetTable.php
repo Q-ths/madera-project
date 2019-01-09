@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * ModuleProjet Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\ProjetTable|\Cake\ORM\Association\BelongsTo $Projet
+ * @property \App\Model\Table\DevisTable|\Cake\ORM\Association\BelongsTo $Devis
  * @property \App\Model\Table\ModuleComposantProjetTable|\Cake\ORM\Association\HasMany $ModuleComposantProjet
  *
  * @method \App\Model\Entity\ModuleProjet get($primaryKey, $options = [])
@@ -42,9 +42,8 @@ class ModuleProjetTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);
-        $this->belongsTo('Projet', [
-            'foreignKey' => 'projet_id',
-            'joinType' => 'INNER'
+        $this->belongsTo('Devis', [
+            'foreignKey' => 'devis_id'
         ]);
         $this->hasMany('ModuleComposantProjet', [
             'foreignKey' => 'module_projet_id'
@@ -98,7 +97,7 @@ class ModuleProjetTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['projet_id'], 'Projet'));
+        $rules->add($rules->existsIn(['devis_id'], 'Devis'));
 
         return $rules;
     }

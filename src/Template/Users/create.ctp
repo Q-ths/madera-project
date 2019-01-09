@@ -16,7 +16,7 @@
 
     <div class="row title-page">
         <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 title">
-            <h6>Modification d'un utilisateur</h6>
+            <h6>Ajout d'un utilisateur</h6>
         </div>
         <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-text-right">
             <a class="btn btn-page-actions" href="/users" ><i class="material-icons icons-page-actions">arrow_back</i></a>
@@ -26,7 +26,7 @@
 
     <div class="container-page-content">
         <div class="row">
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label >Nom *</label>
                     <input type="text" class="form-control" ng-class="(user.nom != null) ? 'is-valid' : 'is-invalid' " ng-model="user.nom" placeholder="Nom *">
@@ -35,13 +35,21 @@
                     Please provide a valid city.
                 </div>
             </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label >Prénom *</label>
                     <input type="text" class="form-control" ng-class="(user.prenom != null) ? 'is-valid' : 'is-invalid' " ng-model="user.prenom" placeholder="Prénom *">
                 </div>
                 <div class="invalid-feedback">
                     Please provide a valid city.
+                </div>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label >Profil</label>
+                    <select class="form-control" ng-model="user.profil_id" >
+                        <option value="{{item.id}}" ng-repeat="item in profils">{{ item.nom }}</option>
+                    </select>
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -74,6 +82,11 @@
             $(".alert").hide();
 
             $scope.user = null;
+            $scope.profils = null;
+
+            $http.get('/profil/get').then(function ($response) {
+                $scope.profils = $response.data;
+            });
 
             $scope.add = function () {
                 let size = Object.keys($scope.user).length;

@@ -146,7 +146,7 @@ class ModuleProjetController extends AppController
         $module = $this->ModuleProjet->get($id);
         $module->date_out = (new \DateTime())->format('Y-m-d H:m:s');
         if ($this->ModuleProjet->save($module)) {
-            $modules = $this->ModuleProjet->find('OrderByActivate', ['table' => 'ModuleProjet'])->toArray();
+            $modules = $this->ModuleProjet->find('OrderByActivate', ['table' => 'ModuleProjet'])->where(['devis_id' => $module->devis_id])->toArray();
             return $this->renderToJson(json_encode($modules));
         } else {
             return $this->response->withStatus(400);
@@ -164,7 +164,7 @@ class ModuleProjetController extends AppController
         $module = $this->ModuleProjet->get($id);
         $module->date_out = null;
         if ($this->ModuleProjet->save($module)) {
-            $modules = $this->ModuleProjet->find('OrderByActivate', ['table' => 'ModuleProjet'])->toArray();
+            $modules = $this->ModuleProjet->find('OrderByActivate', ['table' => 'ModuleProjet'])->where(['devis_id' => $module->devis_id])->toArray();
             return $this->renderToJson(json_encode($modules));
         } else {
             return $this->response->withStatus(400);

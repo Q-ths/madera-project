@@ -41,7 +41,7 @@ class ModuleController extends AppController
     }
 
     public function getEnable() {
-        $modules = $this->Module->find('enable')->toArray();
+        $modules = $this->Module->find('enable',['table' => 'Module'])->contain(['Gamme','TypeFinition','TypeIsolant'])->toArray();
 
         return $this->renderToJson(json_encode($modules));
     }
@@ -84,7 +84,7 @@ class ModuleController extends AppController
 
 
                 if ($this->ComposantModule->saveMany($composantsModule)) {
-                    return $this->response->withStatus(200);
+                    return $this->renderToJson(json_encode($module));
                 }
 
             }
@@ -126,7 +126,7 @@ class ModuleController extends AppController
         $module = $this->Module->get($id);
         $module->date_out = (new \DateTime())->format('Y-m-d H:m:s');
         if ($this->Module->save($module)) {
-            $modules = $this->Module->find('OrderByActivate', ['table' => 'Module'])->toArray();
+            $modules = $this->Module->find('OrderByActivate', ['table' => 'Module'])->contain(['Gamme'])->toArray();
             return $this->renderToJson(json_encode($modules));
         } else {
             return $this->response->withStatus(400);
@@ -144,7 +144,7 @@ class ModuleController extends AppController
         $module = $this->Module->get($id);
         $module->date_out = null;
         if ($this->Module->save($module)) {
-            $modules = $this->Module->find('OrderByActivate', ['table' => 'Module'])->toArray();
+            $modules = $this->Module->find('OrderByActivate', ['table' => 'Module'])->contain(['Gamme'])->toArray();
             return $this->renderToJson(json_encode($modules));
         } else {
             return $this->response->withStatus(400);

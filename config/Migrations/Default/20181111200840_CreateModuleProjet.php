@@ -20,8 +20,8 @@ class CreateModuleProjet extends AbstractMigration
             ->addColumn('derniere_date_modification', 'datetime', ['null' => true,'default' => null])
             ->addColumn('date_in','datetime',['null' => true,'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('date_out','datetime',['null' => true,'default' => null])
-            ->addColumn('projet_id', 'integer',  ['null' => false])
-            ->addForeignKey('projet_id', 'projet', 'id', ['delete' => 'restrict', 'update' => 'restrict'])
+            ->addColumn('devis_id', 'integer',  ['null' => false])
+            ->addForeignKey('devis_id', 'devis', 'id', ['delete' => 'restrict', 'update' => 'restrict'])
             ->create();
     }
 }

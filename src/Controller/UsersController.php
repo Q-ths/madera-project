@@ -1,6 +1,9 @@
 <?php
 namespace App\Controller;
 
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\I18n\FrozenTime;
+
 /**
  * Users Controller
  *
@@ -30,6 +33,12 @@ class UsersController extends AppController
             return $this->renderToJson(json_encode($users));
     }
 
+    public function getEnable() {
+        $type_isolants = $this->Users->find('enable',['table' => 'Users'])->toArray();
+
+        return $this->renderToJson(json_encode($type_isolants));
+    }
+
     /**
      * View method
      *
@@ -57,6 +66,7 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user->password = (new DefaultPasswordHasher())->hash($user->password);
             if ($this->Users->saveOrFail($user)) {
                 $users = $this->Users->find()->enableHydration(false)->all()->toArray();
                 return $this->renderToJson(json_encode($users));
@@ -80,29 +90,53 @@ class UsersController extends AppController
             $user = $this->Users->get($id, [
                 'contain' => []
             ]);
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
+
+
+            $data = $this->request->getData();
+            if(isset($data['password']))
+                $data['password'] = (new DefaultPasswordHasher())->hash($data['password']);
+
+            $user = $this->Users->patchEntity($user, $data);
+
+            $user->date_in = FrozenTime::parseDate($user->date_in);
+            if ($this->Users->saveOrFail($user)) {
                 $users = $this->Users->find()->enableHydration(false)->all()->toArray();
                 return $this->renderToJson(json_encode($users));
             }
+        }
+    }
+
+    /**
+     * @param null $id
+     * @return TypeFinitionController|\Cake\Http\Response
+     * @throws \Exception
+     */
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $type_finition = $this->Users->get($id);
+        $type_finition->date_out = (new \DateTime())->format('Y-m-d H:m:s');
+        if ($this->Users->save($type_finition)) {
+            $type_finitions = $this->Users->find('OrderByActivate')->toArray();
+            return $this->renderToJson(json_encode($type_finitions));
+        } else {
             return $this->response->withStatus(400);
         }
     }
 
     /**
-     * Delete method
-     *
-     * @param string|null $id Users id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param null $id
+     * @return FamilleComposantController|\Cake\Http\Response
+     * @throws \Exception
      */
-    public function delete($id = null)
+    public function enable($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $users = $this->Users->findAll()->enableHydration(false)->all()->toArray();
-            return $this->renderToJson(json_encode($users));
+        $type_finition = $this->Users->get($id);
+        $type_finition->date_out = null;
+        if ($this->Users->save($type_finition)) {
+            $type_finitions = $this->Users->find('OrderByActivate')->toArray();
+            return $this->renderToJson(json_encode($type_finitions));
         } else {
             return $this->response->withStatus(400);
         }
@@ -126,4 +160,9 @@ class UsersController extends AppController
             }
         }
     }
+
+    public function logout() {
+        return $this->redirect($this->Auth->logout());
+    }
+
 }

@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Droit Model
  *
- * @property |\Cake\ORM\Association\BelongsTo $ApplicationModule
+ * @property \App\Model\Table\ApplicationModuleTable|\Cake\ORM\Association\BelongsTo $ApplicationModule
  * @property \App\Model\Table\ProfilTable|\Cake\ORM\Association\BelongsToMany $Profil
  *
  * @method \App\Model\Entity\Droit get($primaryKey, $options = [])

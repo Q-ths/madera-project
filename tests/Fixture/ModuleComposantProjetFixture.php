@@ -36,11 +36,11 @@ class ModuleComposantProjetFixture extends TestFixture
         'date_out' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'module_projet_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
-            'module_projet_id' => ['type' => 'index', 'columns' => ['module_projet_id'], 'length' => []],
+            'module_composant_projet_module_projet_id_fk' => ['type' => 'index', 'columns' => ['module_projet_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'module_composant_projet_ibfk_1' => ['type' => 'foreign', 'columns' => ['module_projet_id'], 'references' => ['module_projet', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'module_composant_projet_module_projet_id_fk' => ['type' => 'foreign', 'columns' => ['module_projet_id'], 'references' => ['module_projet', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -65,9 +65,9 @@ class ModuleComposantProjetFixture extends TestFixture
                 'tva' => 1,
                 'quantite' => 1,
                 'user_id' => 1,
-                'derniere_date_modification' => '2019-01-07 23:16:33',
-                'date_in' => '2019-01-07 23:16:33',
-                'date_out' => '2019-01-07 23:16:33',
+                'derniere_date_modification' => '2019-01-08 20:09:05',
+                'date_in' => '2019-01-08 20:09:05',
+                'date_out' => '2019-01-08 20:09:05',
                 'module_projet_id' => 1
             ],
         ];

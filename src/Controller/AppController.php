@@ -65,7 +65,6 @@ class AppController extends Controller
             //'unauthorizedRedirect' => $this->referer()
         ]);
 
-        // Nom du controller var_dump($this->getName());
     }
 
     protected function renderToJson(string $json, $code=200)

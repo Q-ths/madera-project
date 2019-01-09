@@ -60,9 +60,9 @@ class ModuleFixture extends TestFixture
                 'nom' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'marge' => 1,
                 'user_id' => 1,
-                'derniere_date_modification' => '2019-01-07 23:16:33',
-                'date_in' => '2019-01-07 23:16:33',
-                'date_out' => '2019-01-07 23:16:33'
+                'derniere_date_modification' => '2019-01-08 20:09:05',
+                'date_in' => '2019-01-08 20:09:05',
+                'date_out' => '2019-01-08 20:09:05'
             ],
         ];
         parent::init();

@@ -25,6 +25,7 @@ class DroitTableTest extends TestCase
      */
     public $fixtures = [
         'app.droit',
+        'app.application_module',
         'app.profil'
     ];
 
@@ -68,6 +69,16 @@ class DroitTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

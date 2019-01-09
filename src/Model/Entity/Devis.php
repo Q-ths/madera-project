@@ -25,7 +25,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\TypeStatut $type_statut
  * @property \App\Model\Entity\User $user
  */
-class Devi extends Entity
+class Devis extends Entity
 {
 
     /**

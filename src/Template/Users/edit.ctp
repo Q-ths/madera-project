@@ -1,14 +1,14 @@
-<div ng-controller="ClientController">
+<div ng-controller="UtilisateurController">
 
     <div class="alert alert-danger alert-dismissible fade show" id="alert-missing-fields" role="alert">
-        <h4 class="alert-heading">Erreur lors de la validation des données</h4>
+        <h6 class="alert-heading">Erreur lors de la validation des données</h6>
         <p>
             Des champs sont manquants.
         </p>
     </div>
 
     <div class="alert alert-info alert-dismissible fade show" id="alert-info-saving" role="alert">
-        <h4 class="alert-heading">Enregistrement des données</h4>
+        <h6 class="alert-heading">Enregistrement des données</h6>
         <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
         </div>
@@ -16,107 +16,86 @@
 
     <div class="row title-page">
         <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 title">
-            <h4>Modification d'un client</h4>
+            <h6>Modification d'un utilisateur</h6>
         </div>
         <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-text-right">
-            <a class="btn btn-page-actions" href="/client" ><i class="material-icons icons-page-actions">arrow_back</i></a>
+            <a class="btn btn-page-actions" href="/users" ><i class="material-icons icons-page-actions">arrow_back</i></a>
             <a class="btn btn-page-actions" ng-click="add()" ><i class="material-icons icons-page-actions">save</i></a>
         </div>
     </div>
 
     <div class="container-page-content">
         <div class="row">
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label >Nom *</label>
-                    <input type="text" class="form-control" ng-class="(client.nom != null) ? 'is-valid' : 'is-invalid' " ng-model="client.nom" placeholder="Nom *">
+                    <input type="text" class="form-control" ng-class="(user.nom != null) ? 'is-valid' : 'is-invalid' " ng-model="user.nom" placeholder="Nom *">
                 </div>
                 <div class="invalid-feedback">
                     Please provide a valid city.
                 </div>
             </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label >Prénom *</label>
-                    <input type="text" class="form-control" ng-class="(client.prenom != null) ? 'is-valid' : 'is-invalid' " ng-model="client.prenom" placeholder="Prénom *">
+                    <input type="text" class="form-control" ng-class="(user.prenom != null) ? 'is-valid' : 'is-invalid' " ng-model="user.prenom" placeholder="Prénom *">
                 </div>
                 <div class="invalid-feedback">
                     Please provide a valid city.
                 </div>
             </div>
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label >N° d'adresse *</label>
-                    <input type="text" class="form-control" ng-class="(client.adresse_numero != null) ? 'is-valid' : 'is-invalid' " ng-model="client.adresse_numero" placeholder="N° d'adresse *">
-                </div>
-                <div class="invalid-feedback">
-                    Please provide a valid city.
-                </div>
-            </div>
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-group">
-                    <label >Adresse *</label>
-                    <input type="text" class="form-control" ng-class="(client.adresse != null) ? 'is-valid' : 'is-invalid' " ng-model="client.adresse" placeholder="Adresse *">
-                </div>
-                <div class="invalid-feedback">
-                    Please provide a valid city.
-                </div>
-            </div>
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-group">
-                    <label >Ville *</label>
-                    <input type="text" class="form-control" ng-class="(client.ville != null) ? 'is-valid' : 'is-invalid' " ng-model="client.ville" placeholder="Ville *">
-                </div>
-                <div class="invalid-feedback">
-                    Please provide a valid city.
-                </div>
-            </div>
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                <div class="form-group">
-                    <label >Code postal *</label>
-                    <input type="text" class="form-control" ng-class="(client.code_postal != null) ? 'is-valid' : 'is-invalid' " ng-model="client.code_postal" placeholder="Code postal *">
-                </div>
-                <div class="invalid-feedback">
-                    Please provide a valid city.
+                    <label >Profil</label>
+                    <select class="form-control" ng-model="user.profil_id" >
+                        <option value="{{item.id}}" ng-repeat="item in profils">{{ item.nom }}</option>
+                    </select>
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label >E-mail *</label>
-                    <input type="text" class="form-control" ng-class="(client.email != null) ? 'is-valid' : 'is-invalid' " ng-model="client.email" placeholder="E-mail *">
+                    <input type="text" class="form-control" ng-class="(user.email != null) ? 'is-valid' : 'is-invalid' " ng-model="user.email" placeholder="E-mail *">
                 </div>
                 <div class="invalid-feedback">
                     Please provide a valid city.
                 </div>
             </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
-                    <label >N° de téléphone *</label>
-                    <input type="text" class="form-control" ng-class="(client.telephone != null) ? 'is-valid' : 'is-invalid' " ng-model="client.telephone" placeholder="N° de téléphone *">
+                    <label >Mot de passe </label>
+                    <input type="password" class="form-control" ng-model="user.password" placeholder="Mot de passe">
                 </div>
                 <div class="invalid-feedback">
                     Please provide a valid city.
                 </div>
             </div>
+            
         </div>
     </div>
 
 </div>
 <script>
-    angular.module('client', [])
-        .controller('ClientController', ['$scope','$http', function ($scope,$http) {
+    angular.module('user', [])
+        .controller('UtilisateurController', ['$scope','$http', function ($scope,$http) {
 
             $(".alert").hide();
 
-            $scope.client = null;
+            $scope.user = null;
+            $scope.profils = null;
 
-            $http.get('/client/view/' + window.location.search.split('id=')[1]).then(function ($response) {
-                $scope.client = $response.data;
+            $http.get('/profil/get').then(function ($response) {
+                $scope.profils = $response.data;
+            });
+
+            $http.get('/users/view/' + window.location.search.split('id=')[1]).then(function ($response) {
+                $scope.user = $response.data;
+                $scope.user.profil_id += "";
             });
 
             $scope.add = function () {
-                let size = Object.keys($scope.client).length;
-                if(size < 8) {
+                let size = Object.keys($scope.user).length;
+                if(size < 4) {
                     $('#alert-missing-fields').show()
 
                     setTimeout(function () {
@@ -131,12 +110,12 @@
                 let header = new Headers({
                     "Content-Type": "application/json",
                 });
-                fetch('/client/edit/' + $scope.client.id, {headers:header, method:'post', body:JSON.stringify($scope.client)})
+                fetch('/users/edit/' + $scope.user.id, {headers:header, method:'post', body:JSON.stringify($scope.user)})
                     .then(function ($response) {
                         $('#alert-info-saving').hide();
-                       // window.location.href = '/client';
+                        window.location.href = '/users';
                     });
             }
         }]);
-    angular.bootstrap(document,['client']);
+    angular.bootstrap(document,['user']);
 </script>

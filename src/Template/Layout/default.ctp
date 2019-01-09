@@ -47,7 +47,7 @@ $cakeDescription = 'Madera - ';
 </head>
 <body>
     <!--Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark default-color">
+    <nav class="navbar navbar-expand-lg navbar-dark default-color" id>
         <div class="row toolbar-header justify-content-center">
             <div class="col align-self-center">
                 <i class="material-icons">menu</i>
@@ -64,7 +64,7 @@ $cakeDescription = 'Madera - ';
                         <i class="fa fa-user fa-lg"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Déconnexion</a>
+                        <a class="dropdown-item" href="/users/logout">Déconnexion</a>
                     </div>
                 </li>
             </ul>
@@ -91,9 +91,9 @@ $cakeDescription = 'Madera - ';
                                     <span class="menu-collapsed">Projets</span>
                                 </div>
                             </a>
-                            <a href="/module-projet" class="bg-dark list-group-item list-group-item-action">
+                            <a href="/devis" class="bg-dark list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
-                                    <span class="menu-collapsed">Modules</span>
+                                    <span class="menu-collapsed">Devis</span>
                                 </div>
                             </a>
                         <?php endif; ?>
@@ -173,11 +173,11 @@ $cakeDescription = 'Madera - ';
                                     <span class="menu-collapsed">Utilisateurs</span>
                                 </div>
                             </a>
-                            <a href="/droits" class="bg-dark list-group-item list-group-item-action">
+                            <!--<a href="/droits" class="bg-dark list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-start align-items-center">
                                     <span class="menu-collapsed">Gestions des droits </span>
                                 </div>
-                            </a>
+                            </a>-->
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -193,5 +193,8 @@ $cakeDescription = 'Madera - ';
            </div>
         </div><!-- Main Col END -->
     </div>
+    <script>
+
+    </script>
 </body>
 </html>

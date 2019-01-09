@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\ClientTable|\Cake\ORM\Association\BelongsTo $Client
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\DevisTable|\Cake\ORM\Association\HasMany $Devis
  * @property \App\Model\Table\ModuleTable|\Cake\ORM\Association\BelongsToMany $Module
  *
@@ -45,8 +44,10 @@ class ProjetTable extends Table
             'foreignKey' => 'client_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'utilisateur_id',
+        $this->hasOne('Responsable', [
+            'className' => 'Users',
+            'bindingKey' => 'utilisateur_id',
+            'foreignKey' => 'id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
@@ -73,12 +74,6 @@ class ProjetTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->scalar('reference')
-            ->maxLength('reference', 25)
-            ->requirePresence('reference', 'create')
-            ->notEmpty('reference');
 
         $validator
             ->dateTime('date_creation')

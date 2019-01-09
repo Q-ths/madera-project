@@ -1,4 +1,4 @@
-<div ng-controller="TvasController">
+<div ng-controller="ProjetController">
 
     <div class="alert alert-danger alert-dismissible fade show" id="alert-missing-fields" role="alert">
         <h4 class="alert-heading">Erreur lors de la validation des données</h4>
@@ -27,7 +27,7 @@
 
     <div class="container-page-content">
         <div class="row">
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="form-group">
                     <label> Libelle</label>
                     <input type="text" class="form-control" ng-model="projet.nom" ng-class="(projet.nom.length > 0) ? 'is-valid' : 'is-invalid' " placeholder="Libelle">
@@ -35,20 +35,14 @@
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
-                    <label> Référence</label>
-                    <input type="text" class="form-control" ng-model="projet.reference" ng-class="(projet.reference.length > 0) ? 'is-valid' : 'is-invalid' " placeholder="Référence">
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
                     <label >Client</label>
-                    <select ng-options="t.id as (t.nom + ' ' + t.prenom) for t in clients" ng-class="(projet.client_id != null) ? 'is-valid' : 'is-invalid' " class="form-control" ng-model="projet.client_id"></select>
+                    <select ng-options="t.id as (t.nom + ' ' + t.prenom) for t in clients" ng-class="(projet.client_id != null) ? 'is-valid' : 'is-invalid' " class="form-control" ng-change="onChangeClient()" ng-model="projet.client_id"></select>
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label >Utilisateur</label>
-                    <select ng-options="t.id as (t.nom + ' ' + t.prenom) for t in users" class="form-control" ng-class="(projet.utilisateur_id != null) ? 'is-valid' : 'is-invalid' " ng-model="projet.utilisateur_id"></select>
+                    <select ng-options="t.id as (t.nom + ' ' + t.prenom) for t in users" class="form-control" ng-class="(projet.utilisateur_id != null) ? 'is-valid' : 'is-invalid' " ng-change="onChangeUser()" ng-model="projet.utilisateur_id"></select>
                 </div>
             </div>
         </div>
@@ -57,7 +51,7 @@
 </div>
 <script>
     angular.module('tva', [])
-        .controller('TvasController', ['$scope','$http', function ($scope,$http) {
+        .controller('ProjetController', ['$scope','$http', function ($scope,$http) {
 
             $(".alert").hide();
 

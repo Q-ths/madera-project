@@ -87,18 +87,6 @@
     margin-bottom: 1vh;
 }
 
-td > a > .material-icons {
-    padding: 8px;
-    font-size: 19px;
-}
-
-.table > tbody > tr > td {
-    padding-bottom: 10px;
-}
-
-.table td {
-    vertical-align: unset !important;
-}
 
 .btn-page-actions {
     padding: 0;
@@ -127,3 +115,13 @@ td > a > .material-icons {
 .navbar {
     padding: .5rem .25rem .25rem 1.5rem;
 }
+
+.modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.modal-dialog {
+    overflow-y: initial !important;
+}
+

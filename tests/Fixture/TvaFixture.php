@@ -54,9 +54,9 @@ class TvaFixture extends TestFixture
                 'nom' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'pourcentage_tva' => 1,
                 'user_id' => 1,
-                'derniere_date_modification' => '2019-01-07 23:16:34',
-                'date_in' => '2019-01-07 23:16:34',
-                'date_out' => '2019-01-07 23:16:34'
+                'derniere_date_modification' => '2019-01-08 20:09:06',
+                'date_in' => '2019-01-08 20:09:06',
+                'date_out' => '2019-01-08 20:09:06'
             ],
         ];
         parent::init();

@@ -43,6 +43,11 @@ class DevisTable extends Table
             'foreignKey' => 'projet_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('ModuleProjet', [
+            'foreignKey' => 'devis_id',
+            'joinType' => 'INNER'
+
+        ]);
         $this->belongsTo('TypeStatut', [
             'foreignKey' => 'type_statut_id',
             'joinType' => 'INNER'
@@ -63,6 +68,11 @@ class DevisTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->scalar('reference')
+            ->requirePresence('reference', 'create')
+            ->notEmpty('reference');
 
         $validator
             ->scalar('client_nom')

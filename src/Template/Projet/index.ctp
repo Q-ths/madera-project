@@ -15,7 +15,6 @@
                 <tr>
                     <th data-sortable="true">#</th>
                     <th data-sortable="true">Libelle</th>
-                    <th data-sortable="true">Référence</th>
                     <th data-sortable="true">Client</th>
                     <th data-sortable="true">Responsable</th>
                     <th data-sortable="true">Actions</th>
@@ -25,7 +24,6 @@
                 <tr ng-repeat="item in projets">
                     <td>{{ $index +1 }}</td>
                     <td>{{ item.nom }}</td>
-                    <td>{{ item.reference }}</td>
                     <td>{{ item.client.nom + ' ' + item.client.prenom }}</td>
                     <td>{{ item.responsable.nom + ' ' + item.responsable.prenom }}</td>
                     <td class="align-center">

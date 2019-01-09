@@ -56,7 +56,7 @@ class GammeController extends AppController
 
     public function view($id)
     {
-        $gamme = $this->Gamme->get($id);
+        $gamme = $this->Gamme->get($id, ['contain' => ['Module']]);
 
         if($gamme)
             return $this->renderToJson(json_encode($gamme));

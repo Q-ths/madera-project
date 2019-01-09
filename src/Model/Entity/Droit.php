@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property int $valeur
  * @property int $application_module_id
  *
+ * @property \App\Model\Entity\ApplicationModule $application_module
  * @property \App\Model\Entity\Profil[] $profil
  */
 class Droit extends Entity
@@ -29,6 +30,7 @@ class Droit extends Entity
         'nom' => true,
         'valeur' => true,
         'application_module_id' => true,
+        'application_module' => true,
         'profil' => true
     ];
 }

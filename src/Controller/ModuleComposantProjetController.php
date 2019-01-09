@@ -45,6 +45,35 @@ class ModuleComposantProjetController extends AppController
      * @return \Cake\Http\Response
      * @throws \Exception
      */
+    public function create()
+    {
+
+        /** @var ModuleComposantProjet $module */
+        $this->enableAutoRender();
+        if ($this->request->is('post')) {
+            $module = $this->ModuleComposantProjet->newEntity();
+
+            $data = $this->request->getData();
+            unset($data['fournisseur_id']);
+            unset($data['famille_composant_id']);
+            unset($data['famille_composant']);
+            unset($data['tva_id']);
+
+            $module = $this->ModuleComposantProjet->patchEntity($module, $this->request->getData());
+            $module->date_in = FrozenTime::parseDate($module->date_in);
+
+            if($this->ModuleComposantProjet->saveOrFail($module)) {
+                $modules = $this->ModuleComposantProjet->find('OrderByActivate', ['table' => 'ModuleComposantProjet'])->where(['module_projet_id' => $module->module_projet_id])->toArray();
+                return $this->renderToJson(json_encode($modules));
+            }
+            return $this->response->withStatus(400);
+        }
+    }
+    /**
+     * @param null $id
+     * @return \Cake\Http\Response
+     * @throws \Exception
+     */
     public function edit($id = null)
     {
 
@@ -53,11 +82,18 @@ class ModuleComposantProjetController extends AppController
         if ($this->request->is('post')) {
             $module = $this->ModuleComposantProjet->get($id);
 
+            $data = $this->request->getData();
+            unset($data['fournisseur_id']);
+            unset($data['famille_composant_id']);
+            unset($data['famille_composant']);
+            unset($data['tva_id']);
+
             $module = $this->ModuleComposantProjet->patchEntity($module, $this->request->getData());
             $module->date_in = FrozenTime::parseDate($module->date_in);
 
             if($this->ModuleComposantProjet->saveOrFail($module)) {
-                return $this->response->withStatus(200)->withType('application/json')->withStringBody(json_encode([]));
+                $modules = $this->ModuleComposantProjet->find('OrderByActivate', ['table' => 'ModuleComposantProjet'])->where(['module_projet_id' => $module->module_projet_id])->toArray();
+                return $this->renderToJson(json_encode($modules));
             }
             return $this->response->withStatus(400);
         }

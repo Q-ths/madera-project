@@ -17,6 +17,7 @@ class CreateDevis extends AbstractMigration
             ->addForeignKey('projet_id', 'projet', 'id', ['update' => 'restrict', 'delete' => 'restrict'])
             ->addColumn('type_statut_id','integer', ['null' => false])
             ->addForeignKey('type_statut_id', 'type_statut', 'id', ['update' => 'restrict', 'delete' => 'restrict'])
+            ->addColumn('reference','text', ['null' => false])
             ->addColumn('client_nom','text', ['null' => false])
             ->addColumn('client_prenom','text',['null' => false])
             ->addColumn('adresse_numero','integer', ['null' => false])

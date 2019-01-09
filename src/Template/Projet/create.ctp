@@ -1,4 +1,4 @@
-<div ng-controller="TvasController">
+<div ng-controller="ProjetController">
 
     <div class="alert alert-danger alert-dismissible fade show" id="alert-missing-fields" role="alert">
         <h4 class="alert-heading">Erreur lors de la validation des données</h4>
@@ -17,26 +17,20 @@
 
     <div class="row title-page">
         <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 title">
-            <h4>Ajout d'une TVA</h4>
+            <h4>Ajout d'un projet</h4>
         </div>
         <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-text-right">
-            <a class="btn btn-page-actions" href="/tva" ><i class="material-icons icons-page-actions">arrow_back</i></a>
+            <a class="btn btn-page-actions" href="/projet" ><i class="material-icons icons-page-actions">arrow_back</i></a>
             <a class="btn btn-page-actions" ng-click="add()" ><i class="material-icons icons-page-actions">save</i></a>
         </div>
     </div>
 
     <div class="container-page-content">
         <div class="row">
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="form-group">
                     <label> Libelle</label>
                     <input type="text" class="form-control" ng-model="projet.nom" ng-class="(projet.nom.length > 0) ? 'is-valid' : 'is-invalid' " placeholder="Libelle">
-                </div>
-            </div>
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <div class="form-group">
-                    <label> Référence</label>
-                    <input type="text" class="form-control" ng-model="projet.reference" ng-class="(projet.reference.length > 0) ? 'is-valid' : 'is-invalid' " placeholder="Référence">
                 </div>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
@@ -56,8 +50,8 @@
 
 </div>
 <script>
-    angular.module('tva', [])
-        .controller('TvasController', ['$scope','$http', function ($scope,$http) {
+    angular.module('projet', [])
+        .controller('ProjetController', ['$scope','$http', function ($scope,$http) {
 
             $(".alert").hide();
 
@@ -72,7 +66,7 @@
                 $scope.clients = $response.data;
             });
 
-            $http.get('/users/get').then(function ($response) {
+            $http.get('/users/getEnable').then(function ($response) {
                 $scope.users = $response.data;
             });
 
@@ -86,7 +80,7 @@
 
             $scope.add = function () {
                 let size = Object.keys($scope.projet).length;
-                if(size < 4) {
+                if(size < 3) {
                     $('#alert-missing-fields').show()
 
                     setTimeout(function () {
@@ -109,5 +103,5 @@
                     });
             }
         }]);
-    angular.bootstrap(document,['tva']);
+    angular.bootstrap(document,['projet']);
 </script>
